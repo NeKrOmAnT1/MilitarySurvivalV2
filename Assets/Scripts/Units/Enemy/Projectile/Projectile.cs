@@ -21,12 +21,14 @@ public class Projectile : MonoBehaviour
     private PlayerHealth _playerHealth;
     private float _damage;
     private Vector3 _attackPos;
+    private ProjectileFactory _factory;
 
-    public void Init(PlayerHealth playerHealth, float damage, Transform target)
+    public void Init(PlayerHealth playerHealth, float damage, Transform target)//, ProjectileFactory factory)
     {
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
+        //_factory = factory;
 
         _rigidbody.useGravity = false;
 
@@ -56,7 +58,7 @@ public class Projectile : MonoBehaviour
     {
         Damage();
         _exp.DeleteSphere();
-        this.gameObject.SetActive(false);
+        //_factory.RemoveProjectile(this);
         _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
         Invoke("DeleteBullet", _timeToDelete);
     }
