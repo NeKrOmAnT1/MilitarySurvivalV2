@@ -38,7 +38,7 @@ public class ProjectileEnemy : Enemy, ICanAttack
         projectile.Init(_playerHealth, _damage, Target);
         projectile.Launch();
 
-        //_projectileFactory.SpawnProjectile(transform, _playerHealth, _damage, Target)
+        //_projectileFactory.SpawnProjectile(this.transform.position, _playerHealth, _damage, Target)
         //    .Launch();
     }
 
