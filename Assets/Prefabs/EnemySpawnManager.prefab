@@ -65,7 +65,7 @@ MonoBehaviour:
     ram1EnemyAmount: 0
     spit1EnemyAmount: 0
     projectile1EnemyAmount: 2
-    spawnTime: 10
+    spawnTime: 20
   startPoolSize: 10
 --- !u!1 &4062401766149362235
 GameObject:

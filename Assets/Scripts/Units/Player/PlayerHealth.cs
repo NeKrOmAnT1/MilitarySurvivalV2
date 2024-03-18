@@ -18,7 +18,6 @@ public class PlayerHealth
 
     public void HealthReduce(float damage)
     {
-        
         if (_currentHealth > 0)
         {
             _currentHealth -= damage;
@@ -32,7 +31,6 @@ public class PlayerHealth
 
             OnHealthChangedE?.Invoke(_currentHealth, _player.PlayerCharacteristics.Hp.Value);//for UI
         }
-        Debug.Log(_currentHealth);
     }
 
     public void HealthRepare(float value)

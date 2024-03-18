@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3707156407231153791}
   m_Layer: 11
-  m_Name: ExpDmg
+  m_Name: TargetDmg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

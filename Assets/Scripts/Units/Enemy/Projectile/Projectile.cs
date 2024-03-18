@@ -1,10 +1,12 @@
-using System;
 using UnityEngine;
+using Zenject;
 
-public class TestBullet : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    [SerializeField] private GameObject _explosionPrefab;
-    [SerializeField] private GameObject _explosionDamagePrefab;
+    public class Pool : MonoMemoryPool<Projectile> { }
+
+    [SerializeField] private GameObject _targetPrefab;
+    [SerializeField] private GameObject _targetDamagePrefab;
     [Space]
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private SphereCollider _collider;
@@ -29,7 +31,7 @@ public class TestBullet : MonoBehaviour
         _rigidbody.useGravity = false;
 
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
-        _exp.CreateSphere(_attackPos, _damageArea, _explosionPrefab);
+        _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
 
     public void Launch()
@@ -42,28 +44,12 @@ public class TestBullet : MonoBehaviour
     private LaunchData CalculateLaunchData()
     {
         float displacementY = _target.position.y - _rigidbody.position.y;
-        Vector3 displacementXZ = new Vector3(_target.position.x - _rigidbody.position.x, 0, _target.position.z - _rigidbody.position.z);
+        Vector3 displacementXZ = new(_target.position.x - _rigidbody.position.x, 0, _target.position.z - _rigidbody.position.z);
         float time = Mathf.Sqrt(-2 * _h / _gravity) + Mathf.Sqrt(2 * (displacementY - _h) / _gravity);
         Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity * _h);
         Vector3 velocityXZ = displacementXZ / time;
 
         return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(_gravity), time);
-    }
-
-    private void DrawPath()
-    {
-        LaunchData launchData = CalculateLaunchData();
-        Vector3 previousDrawPoint = _rigidbody.position;
-
-        int resolution = 30;
-        for (int i = 1; i <= resolution; i++)
-        {
-            float simulationTime = i / (float)resolution * launchData.timeToTarget;
-            Vector3 displacement = launchData.initialVelocity * simulationTime + Vector3.up * _gravity * simulationTime * simulationTime / 2f;
-            Vector3 drawPoint = _rigidbody.position + displacement;
-            Debug.DrawLine(previousDrawPoint, drawPoint, Color.green);
-            previousDrawPoint = drawPoint;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,7 +58,7 @@ public class TestBullet : MonoBehaviour
         Damage();
         _exp.DeleteSphere();
         this.gameObject.SetActive(false);
-        _exp.CreateDamageSphere(_attackPos, _damageArea, _explosionDamagePrefab);
+        _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
         Invoke("DeleteBullet", _timeToDelete);
     }
 
@@ -88,7 +74,7 @@ public class TestBullet : MonoBehaviour
         }
     }
 
-    struct LaunchData
+    readonly struct LaunchData
     {
         public readonly Vector3 initialVelocity;
         public readonly float timeToTarget;

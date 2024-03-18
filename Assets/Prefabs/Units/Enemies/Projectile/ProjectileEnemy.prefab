@@ -172,9 +172,8 @@ MonoBehaviour:
   _damage: 14
   _attackDelay: 4
   _xpForKilling: 5
-  _bulletPrefab: {fileID: 5908034572427650809, guid: d986adae91e10b04eb94c013f1d004d9, type: 3}
   _firePoint: {fileID: 1534344807005747685}
-  _testBulletPrefab: {fileID: 8949988406024596993, guid: b62a243981d4f8345a02f8a743907435, type: 3}
+  _projectilePrefab: {fileID: 8949988406024596993, guid: b62a243981d4f8345a02f8a743907435, type: 3}
 --- !u!114 &2839244321950711248
 MonoBehaviour:
   m_ObjectHideFlags: 0

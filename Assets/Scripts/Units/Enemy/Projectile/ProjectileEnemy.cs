@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
+using Zenject;
 
 public class ProjectileEnemy : Enemy, ICanAttack
 {
-    //[SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private GameObject _testBulletPrefab;
+    [SerializeField] private GameObject _projectilePrefab;
+    private ProjectileFactory _projectileFactory; //crutch
 
-    private Vector3 _attackPos;
     private bool _isAttack = false;
     private float _timer = 0;
 
@@ -19,26 +20,28 @@ public class ProjectileEnemy : Enemy, ICanAttack
         {
             _isAttack = true;
             StartAttack();
-            Trajectory();
+            InitBullet();
             _timer = _attackDelay;
         }
     }
 
     private void StartAttack()
     {
-        _attackPos = new Vector3(Target.position.x, -1f, Target.position.z);
         _isAttack = false;
     }
 
-    private void Trajectory()
+    private void InitBullet()
     {
-        //GameObject newBullet = Instantiate(_bulletPrefab, _firePoint.position, Quaternion.identity);
-        //newBullet.GetComponent<EnemyBullet>().Initialize(_playerHealth, _damage, _attackPos);
+        Debug.Log(_projectileFactory);
+        GameObject bullet = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+        var projectile = bullet.GetComponent<Projectile>();
+        projectile.Init(_playerHealth, _damage, Target);
+        projectile.Launch();
 
-        GameObject bullet = Instantiate(_testBulletPrefab, transform.position, Quaternion.identity);
-        var test = bullet.GetComponent<TestBullet>();
-            test.Init(_playerHealth, _damage, Target);
-        test.Launch();
-
+        //_projectileFactory.SpawnProjectile(transform, _playerHealth, _damage, Target)
+        //    .Launch();
     }
+
+    public void DetFactory(ProjectileFactory projectileFactory) =>//crutch
+        _projectileFactory = projectileFactory;
 }

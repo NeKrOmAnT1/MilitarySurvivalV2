@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,19 @@ using Zenject;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    [Inject] private Player _player;
-    private Transform target;
-    private PlayerHealth playerHealth;
+
+    public event Action<EnemyHealth> OnSpawned;
 
     [Header("EnemySettings")]
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private StepSpawnConfig[] stepSpawnConfigs;
+
+    [Inject] private Player _player;
+    [Inject] private ProjectileFactory _projectileFactory;
+
+    private Transform target;
+    private PlayerHealth playerHealth;
 
     private Dictionary<string, EnemyPool<Transform>> enemyPools;
     private int currentStep = 0;
@@ -25,7 +31,6 @@ public class EnemySpawnManager : MonoBehaviour
     {
         target = _player.transform;
         playerHealth = _player.PlayerHealth;
-        //Debug.Log(target);
 
 
         enemyPools = new Dictionary<string, EnemyPool<Transform>>();
@@ -35,16 +40,13 @@ public class EnemySpawnManager : MonoBehaviour
             enemyPools.Add(enemyPrefabs[i].tag, new EnemyPool<Transform>(enemyPrefabs[i].GetComponent<Transform>(),
                                                                       startPoolSize,
                                                                       enemyContainer.transform));
-           // Debug.Log("Нажмите Space для следующей волны противников");
+            // Debug.Log("Нажмите Space для следующей волны противников");
         }
 
-        
+
         StartNextSpawnStep();
     }
 
-    /// <summary>
-    /// screw the ProgressSystem
-    /// </summary>
     private PlayerCharacteristics DefaultCharacteristicsImplementation() =>
         _characteristics = new(Instantiate(Resources.Load<PlayerSO>(SOPath)));
 
@@ -55,7 +57,6 @@ public class EnemySpawnManager : MonoBehaviour
             StartCoroutine(SpawnEnemiesOnStep(stepSpawnConfigs[currentStep]));
             currentStep++;
         }
-       
     }
 
     private IEnumerator SpawnEnemiesOnStep(StepSpawnConfig stepConfig)
@@ -89,7 +90,7 @@ public class EnemySpawnManager : MonoBehaviour
             }
         }
 
-        
+
         yield return new WaitForSeconds(stepConfig.spawnTime);
         StartNextSpawnStep();
     }
@@ -99,10 +100,16 @@ public class EnemySpawnManager : MonoBehaviour
         Transform randomSpawnPoint = GetRandomSpawnPoint();
         Transform enemy = pool.GetObject();
         enemy.position = randomSpawnPoint.position;
-        enemy.GetComponent<Enemy>().Init(playerHealth, target);
+        var Enemy = enemy.GetComponent<Enemy>();
+        Enemy.Init(playerHealth, target);
+
+        if (Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy)) //crutch
+            projectileEnemy.DetFactory(_projectileFactory);
+
+        OnSpawned?.Invoke(Enemy.GetComponent<EnemyHealth>());
     }
     private Transform GetRandomSpawnPoint()
     {
-        return spawnPoints[Random.Range(0, spawnPoints.Length)];
+        return spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
     }
 }

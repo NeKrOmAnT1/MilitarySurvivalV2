@@ -79,3 +79,4 @@ MonoBehaviour:
   _playerPrefab: {fileID: 2290216892235248199, guid: 0acd365c113d7ea4abffd126dac1fd96, type: 3}
   _cameraPrefab: {fileID: 5130961125699588083, guid: 8316abc827b88084e96f8d4023b234fe, type: 3}
   _enemySpawnPrefab: {fileID: 6655857326069907471, guid: 04d4b8e267020a348891cc0bc901886e, type: 3}
+  _projectilePrefab: {fileID: 8598036695169180062, guid: b62a243981d4f8345a02f8a743907435, type: 3}
