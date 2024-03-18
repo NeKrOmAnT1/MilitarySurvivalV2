@@ -32,7 +32,6 @@ public class ProjectileEnemy : Enemy, ICanAttack
 
     private void InitBullet()
     {
-        Debug.Log(_projectileFactory);
         GameObject bullet = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
         var projectile = bullet.GetComponent<Projectile>();
         projectile.Init(_playerHealth, _damage, Target);

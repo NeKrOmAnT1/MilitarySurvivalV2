@@ -54,7 +54,6 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         Damage();
         _exp.DeleteSphere();
         this.gameObject.SetActive(false);

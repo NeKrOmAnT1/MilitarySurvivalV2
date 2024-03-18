@@ -10,15 +10,41 @@ public class RamEnemy : Enemy, ICanAttack
 
     private bool isCharging = false;
     private bool isCoolingDown = false;
-    private bool isDirecSwap = false;
+    private bool isPlayerChangePos = false;
+    private bool isAttacking = false;
+    public void AttackProcess()
+    {
+        if (_enemyDeath.IsDead) return;
+
+        if (!isCharging && !isCoolingDown)
+        {
+            StartCoroutine(ChargeAttack());
+            _enemyMovement.enabled = true;
+        }
+
+        if (GetDistance() <= 2f && !isAttacking)
+        {
+            _playerHealth.HealthReduce(_damage);
+            isAttacking = true;
+        }
+    }
+
+    private void Update()
+    {
+        if(_enemyMovement.enabled == false)
+        {
+            AttackProcess();
+        }
+    }
 
     private IEnumerator ChargeAttack()
     {
         isCharging = true;
-        initialPosition = new Vector3(Target.position.x, 1f, Target.transform.position.z);
+        isAttacking = false;
+        initialPosition = new Vector3(Target.position.x, Target.transform.position.y, Target.transform.position.z);
         float initialDistance = Vector3.Distance(Target.position, transform.position);
         yield return new WaitForSeconds(1f);
-        direc = new Vector3(Target.transform.position.x, 1f, Target.transform.position.z);
+        direc = new Vector3(Target.transform.position.x, Target.transform.position.y, Target.transform.position.z);
         while (true)
         {
             float distance = Vector3.Distance(Target.position, transform.position);
@@ -28,7 +54,7 @@ public class RamEnemy : Enemy, ICanAttack
             }
             else if (distance > initialDistance)
             {
-                isDirecSwap = true;
+                isPlayerChangePos = true;
                 break;
             }
 
@@ -39,12 +65,13 @@ public class RamEnemy : Enemy, ICanAttack
 
             if (Target.transform.position != initialPosition)
             {
-                isDirecSwap = false;
+                isPlayerChangePos = false;
             }
-            if (isDirecSwap)
+            if (isPlayerChangePos)
             {
-                direc = new Vector3(Target.position.x, 1f, Target.transform.position.z);
+                direc = new Vector3(Target.position.x, Target.transform.position.y, Target.transform.position.z);
             }
+            isAttacking = false;
             transform.position = Vector3.MoveTowards(transform.position, direc, _chargeSpeed * Time.deltaTime);
             _enemyMovement.enabled = false;
             yield return null;
@@ -67,19 +94,4 @@ public class RamEnemy : Enemy, ICanAttack
         return Vector3.Distance(transform.position, Target.transform.position);
     }
 
-    public void AttackProcess()
-    {
-        if (_enemyDeath.IsDead) return;
-
-        if (!isCharging && !isCoolingDown)
-        {
-            StartCoroutine(ChargeAttack());
-            _enemyMovement.enabled = true;
-        }
-
-        if (GetDistance() <= 2f)
-        {
-            _playerHealth.HealthReduce(_damage);
-        }
-    }
 }

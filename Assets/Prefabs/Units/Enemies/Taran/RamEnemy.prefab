@@ -203,10 +203,9 @@ MonoBehaviour:
   _enemyMovement: {fileID: 8716879963411087589}
   _enemyDeath: {fileID: 3818985939475565000}
   _damage: 5
-  _attackDelay: 5
+  _attackDelay: 2
   _xpForKilling: 5
-  chargeSpeed: 8
-  enemyMovement: {fileID: 8716879963411087589}
+  _chargeSpeed: 4
 --- !u!114 &6100722925081774619
 MonoBehaviour:
   m_ObjectHideFlags: 0

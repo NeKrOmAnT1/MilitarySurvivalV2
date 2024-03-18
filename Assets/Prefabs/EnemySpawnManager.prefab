@@ -63,8 +63,8 @@ MonoBehaviour:
   stepSpawnConfigs:
   - melee1EnemyAmount: 0
     ram1EnemyAmount: 0
-    spit1EnemyAmount: 0
-    projectile1EnemyAmount: 2
+    spit1EnemyAmount: 5
+    projectile1EnemyAmount: 0
     spawnTime: 20
   startPoolSize: 10
 --- !u!1 &4062401766149362235
