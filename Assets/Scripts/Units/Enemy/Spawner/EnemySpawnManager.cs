@@ -7,7 +7,7 @@ using Zenject;
 public class EnemySpawnManager : MonoBehaviour
 {
 
-    public event Action<EnemyHealth> OnSpawned;
+    public event Action<EnemyDeath> OnSpawned;
 
     [Header("EnemySettings")]
     [SerializeField] private GameObject[] enemyPrefabs;
@@ -106,7 +106,7 @@ public class EnemySpawnManager : MonoBehaviour
         if (Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy)) //crutch
             projectileEnemy.DetFactory(_projectileFactory);
 
-        OnSpawned?.Invoke(Enemy.GetComponent<EnemyHealth>());
+        OnSpawned?.Invoke(Enemy.GetComponent<EnemyDeath>());
     }
     private Transform GetRandomSpawnPoint()
     {

@@ -171,7 +171,7 @@ MonoBehaviour:
   _enemyDeath: {fileID: 2839244321950711248}
   _damage: 14
   _attackDelay: 4
-  _xpForKilling: 5
+  _xpForKilling: 30
   _firePoint: {fileID: 1534344807005747685}
   _projectilePrefab: {fileID: 8949988406024596993, guid: b62a243981d4f8345a02f8a743907435, type: 3}
 --- !u!114 &2839244321950711248

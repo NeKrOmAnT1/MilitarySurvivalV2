@@ -27,6 +27,9 @@ public class BootstrapInstaller : MonoInstaller
         var camera = Container.InstantiatePrefabForComponent<CameraFollow>(_cameraPrefab);
         camera.Follow(player.transform);
 
-        Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);
+        var spawner = Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);
+        Container.Bind<EnemySpawnManager>().FromInstance(spawner).AsSingle().NonLazy();
+
+        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
     }
 }

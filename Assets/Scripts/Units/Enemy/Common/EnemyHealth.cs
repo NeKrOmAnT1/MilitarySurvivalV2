@@ -5,12 +5,12 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 20;
     [SerializeField] private EnemyDeath _enemyDeath;
+ 
     public float CurrentHealth => _health;
 
     public event Action<float> OnTakeDamage;
 
     private float _health;
-   
 
     void Awake() =>
         _health = _maxHealth;

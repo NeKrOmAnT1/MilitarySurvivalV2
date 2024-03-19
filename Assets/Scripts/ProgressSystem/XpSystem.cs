@@ -1,33 +1,37 @@
 ﻿
 using UnityEngine;
+using Zenject;
 
 public class XpSystem 
 {
-    private readonly int _targetXp; //where to get it from?
+    private HUD _hud;
+    
+    private readonly int _targetXp = 100; //where to get it from?
 
-    public int Xp { get; private set; }
+    public int CurrentXp { get; private set; }
     public bool IsFull { get; private set; }
 
-    /*public XpSystem(EnemySpawnManager enemySpawnManager, int targetXp)
+    public XpSystem(EnemySpawnManager enemySpawnManager, HUD hud)//, int targetXp)
     {
-        _targetXp = targetXp;
-        //enemySpawnManager.OnSpawned += AddEnemy;
+        //_targetXp = targetXp;
+        _hud = hud;
+        enemySpawnManager.OnSpawned += AddEnemy;
+        _hud.UpdateXPValue(CurrentXp, _targetXp);
+    }
 
-        Debug.Log(enemySpawnManager);
-        Debug.Log(_targetXp); 
-    }*/
-
-    //private void AddEnemy(EnemyHealth enemyHealth) => 
-    //    enemyHealth.OnDead += AddXP;
+    private void AddEnemy(EnemyDeath enemy) =>
+        enemy.OnDead += AddXP;
 
     private void AddXP(int xpforKilling)
     {
-        Xp += xpforKilling;
+        CurrentXp += xpforKilling;
 
-        if (Xp >= _targetXp)
+        if (CurrentXp >= _targetXp)
         {
-            Xp = _targetXp;
+            CurrentXp = _targetXp;
             IsFull = true;
         }
+
+        _hud.UpdateXPValue(CurrentXp, _targetXp);
     }
 }

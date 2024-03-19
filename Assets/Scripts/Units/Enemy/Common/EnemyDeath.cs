@@ -5,7 +5,7 @@ public class EnemyDeath : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
 
-    public event Action<float> OnDead; 
+    public event Action<int> OnDead; 
     public bool IsDead { get; private set; } //to block movement and attacks in other classes.
                                              
     public void Death()

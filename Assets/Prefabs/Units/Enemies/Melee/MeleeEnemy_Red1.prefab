@@ -309,7 +309,7 @@ MonoBehaviour:
   _enemyDeath: {fileID: 8177642428669713793}
   _damage: 5
   _attackDelay: 2
-  _xpForKilling: 5
+  _xpForKilling: 30
 --- !u!114 &-8755904842138258759
 MonoBehaviour:
   m_ObjectHideFlags: 0
