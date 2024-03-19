@@ -7,6 +7,8 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
     public PlayerHealth PlayerHealth { get; private set; }
     public SideType SideType { get; set; }
 
+    [SerializeField] private GameObject squadPrefab;
+
     /// <summary>
     /// Single instances of the Characteristics classes. Created here.
     /// Used by other Player parts, modified by ProgressSystem.
@@ -22,11 +24,15 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
 
     public void Awake()
     {
+
         SideType = SideType.ALLY;
 
         PlayerCharacteristics = new(Resources.Load<PlayerSO>(playerSOPath));
         WeaponCharacteristics = new(Resources.Load<WeaponSO>(weaponSOPath));
 
         PlayerHealth = new(this);
+
+        var squad = Instantiate(squadPrefab).GetComponent<SquadScript>();
+        squad.Initialization(transform);
     }
 }

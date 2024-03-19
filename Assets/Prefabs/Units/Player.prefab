@@ -291,3 +291,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8c533f1fee6cf4d9c80adb01ad7bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  squadPrefab: {fileID: 5613596476322809082, guid: 9f93f7fe83fcdab42994250e712a6a4e, type: 3}
