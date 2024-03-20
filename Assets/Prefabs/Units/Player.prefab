@@ -279,6 +279,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2290216892235248199}
   _bulletspawnPoint: {fileID: 7178958953834531544}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &2290216892235248199
 MonoBehaviour:
   m_ObjectHideFlags: 0

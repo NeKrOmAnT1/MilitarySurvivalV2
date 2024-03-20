@@ -2,7 +2,7 @@ public class WeaponCharacteristics : BaseCharacteristics
 {
     public WeaponType WeaponType { get; private set; }
 
-    public Stat AttackSpeed { get; private set; }
+    public Stat BulletSpeed { get; private set; }
     public Stat CoolDown { get; private set; }
     public Stat DamageDealt { get; private set; }
     public Stat Distance { get; private set; }
@@ -15,7 +15,7 @@ public class WeaponCharacteristics : BaseCharacteristics
     {
         WeaponType = weaponStats.WeaponType;
 
-        AttackSpeed = new(weaponStats.AttackSpeed);
+        BulletSpeed = new(weaponStats.BulletSpeed);
         CoolDown = new(weaponStats.CoolDown);
         DamageDealt = new(weaponStats.DamageDealt);
         Distance = new(weaponStats.Distance);
@@ -26,7 +26,7 @@ public class WeaponCharacteristics : BaseCharacteristics
 
     public override void DebuffAll()
     {
-        AttackSpeed.RemoveAllModifiers();
+        BulletSpeed.RemoveAllModifiers();
         CoolDown.RemoveAllModifiers();
         DamageDealt.RemoveAllModifiers();
         Distance.RemoveAllModifiers();

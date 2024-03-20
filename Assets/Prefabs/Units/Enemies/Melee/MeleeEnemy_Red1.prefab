@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 334546104170857854}
   - component: {fileID: 3179648008208946574}
   - component: {fileID: 8667651028763293549}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3871873515827845593}
   - component: {fileID: 1107380363374680440}
   - component: {fileID: 3323658675475411576}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 7449149833748995538}
   - component: {fileID: -8755904842138258759}
   - component: {fileID: 8177642428669713793}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MeleeEnemy_Red1
   m_TagString: Melee1
   m_Icon: {fileID: 0}
@@ -352,6 +352,18 @@ PrefabInstance:
     - target: {fileID: 2238043261962254388, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
       propertyPath: m_Name
       value: EnemiesHPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238043261962254388, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641180995680853758, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812761137847375857, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5328871338971707862, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
       propertyPath: m_Pivot.x

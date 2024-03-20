@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
 
     private void Update() =>
         // Двигаем пулю в заданном направлении
-        transform.Translate(_characteristics.AttackSpeed.Value * Time.deltaTime * _direction, Space.World);
+        transform.Translate(_characteristics.BulletSpeed.Value * Time.deltaTime * _direction, Space.World);
 
     private void OnCollisionEnter(Collision collision)
     {

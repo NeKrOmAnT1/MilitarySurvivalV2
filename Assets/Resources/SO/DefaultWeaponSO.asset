@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DefaultWeaponSO
   m_EditorClassIdentifier: 
   <WeaponType>k__BackingField: 0
-  <AttackSpeed>k__BackingField: 10
+  <BulletSpeed>k__BackingField: 10
   <CoolDown>k__BackingField: 1
   <DamageDealt>k__BackingField: 5
-  <Distance>k__BackingField: 10
-  <SpreadAngle>k__BackingField: 5
-  <BulletsNumber>k__BackingField: 1
-  <DamageArea>k__BackingField: 0
+  <Distance>k__BackingField: 2
+  <SpreadAngle>k__BackingField: 90
+  <BulletsNumber>k__BackingField: 10
+  <DamageArea>k__BackingField: 3

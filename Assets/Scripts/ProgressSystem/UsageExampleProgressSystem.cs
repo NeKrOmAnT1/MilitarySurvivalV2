@@ -177,7 +177,7 @@ public class UsageExampleProgressSystem : MonoBehaviour, ICoroutineRunner
         switch (value)
         {
             case 0:
-                stat = WeaponCharacteristics.AttackSpeed;
+                stat = WeaponCharacteristics.BulletSpeed;
                 break;
             case 1:
                 stat = WeaponCharacteristics.CoolDown;
@@ -198,7 +198,7 @@ public class UsageExampleProgressSystem : MonoBehaviour, ICoroutineRunner
                 stat = WeaponCharacteristics.DamageArea;
                 break;
             default:
-                stat = WeaponCharacteristics.AttackSpeed;
+                stat = WeaponCharacteristics.BulletSpeed;
                 break;
         }
 
@@ -217,7 +217,7 @@ public class UsageExampleProgressSystem : MonoBehaviour, ICoroutineRunner
         _moveSpeedText.text = PlayerCharacteristics.MoveSpeed.Value.ToString();
         _luclText.text = PlayerCharacteristics.Luck.Value.ToString();
 
-        _attackSpeedText.text = WeaponCharacteristics.AttackSpeed.Value.ToString();
+        _attackSpeedText.text = WeaponCharacteristics.BulletSpeed.Value.ToString();
         _cdText.text = WeaponCharacteristics.CoolDown.Value.ToString();
         _damageText.text = WeaponCharacteristics.DamageDealt.Value.ToString();
         _distanceText.text = WeaponCharacteristics.Distance.Value.ToString();

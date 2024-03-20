@@ -62,7 +62,7 @@ public class ProgressSystem
         switch (activeSkill)
         {
             case ActiveSkill.AttackSpeed:
-                skill = _weaponCharacteristics.AttackSpeed;
+                skill = _weaponCharacteristics.BulletSpeed;
                 break;
             case ActiveSkill.CoolDown:
                 skill = _weaponCharacteristics.CoolDown;

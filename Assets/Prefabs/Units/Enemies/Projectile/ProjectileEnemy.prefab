@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2074164495330145802}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: -52887942065949764}
   - component: {fileID: 7377781806306325987}
   - component: {fileID: 2839244321950711248}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectileEnemy
   m_TagString: Projectile1
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534344807005747685}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 5163573893586425879}
   - component: {fileID: 6833519751312129175}
   - component: {fileID: 2027029019068249108}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 8319700199303894070}
   - component: {fileID: 512428302002552870}
   - component: {fileID: 4470069826429907905}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 1059076566950293999}
   - component: {fileID: 8685679466569615487}
   - component: {fileID: 6856043137063927978}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 2426683929333125142}
   - component: {fileID: 3310915675887475275}
   - component: {fileID: 3273152174178204500}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 8364922871396829577}
   - component: {fileID: 8255900352752326375}
   - component: {fileID: 6334321500810716909}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,6 +644,18 @@ PrefabInstance:
     - target: {fileID: 2238043261962254388, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
       propertyPath: m_Name
       value: EnemiesHPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238043261962254388, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641180995680853758, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812761137847375857, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5328871338971707862, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
       propertyPath: m_Pivot.x

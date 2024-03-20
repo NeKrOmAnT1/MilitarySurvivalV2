@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6658203324877574089}
   - component: {fileID: 7991851357510155612}
   - component: {fileID: 7464671999965746654}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6743913649368407601}
   - component: {fileID: 6100722925081774619}
   - component: {fileID: 3818985939475565000}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RamEnemy
   m_TagString: Ram1
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 6388554178659910493}
   - component: {fileID: 7444888224103700421}
   - component: {fileID: 4297637950426545328}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pupa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,6 +327,18 @@ PrefabInstance:
     - target: {fileID: 2238043261962254388, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
       propertyPath: m_Name
       value: EnemiesHPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238043261962254388, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641180995680853758, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812761137847375857, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5328871338971707862, guid: 51a0966eb5d4b9a4ca853f2e23cceff3, type: 3}
       propertyPath: m_Pivot.x
