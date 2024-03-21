@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent((typeof(CharacterController)), typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerAttack))]
@@ -9,26 +11,32 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
 
     [SerializeField] private GameObject squadPrefab;
 
-    /// <summary>
-    /// Single instances of the Characteristics classes. Created here.
-    /// Used by other Player parts, modified by ProgressSystem.
-    /// </summary>
     public PlayerCharacteristics PlayerCharacteristics { get; private set; }
     public WeaponCharacteristics WeaponCharacteristics { get; private set; }
 
-    /// <summary>
-    /// Link to pre-created and configured ScriptableObjects with default characteristics.
-    /// </summary>
-    private const string playerSOPath = "SO/DefaultPlayerSO";
-    private const string weaponSOPath = "SO/DefaultWeaponSO";
+
+    private Dictionary<string, WeaponCharacteristics> _weapons = new();
+
+    [Inject]
+    private void Construct(PlayerCharacteristics playerCharacteristics, WeaponCharacteristics[] weaponCharacteristics, WeaponSelection weaponSelection)
+    {
+        PlayerCharacteristics = playerCharacteristics;
+
+        foreach (var weapon in weaponCharacteristics)
+        {
+            _weapons.Add(weapon.Name, weapon);
+        }
+        
+        WeaponCharacteristics = _weapons[weaponSelection.CurrentWeaponName];
+    }
+
 
     public void Awake()
     {
 
         SideType = SideType.ALLY;
 
-        PlayerCharacteristics = new(Resources.Load<PlayerSO>(playerSOPath));
-        WeaponCharacteristics = new(Resources.Load<WeaponSO>(weaponSOPath));
+        
 
         PlayerHealth = new(this);
 

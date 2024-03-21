@@ -1,5 +1,7 @@
 public class WeaponCharacteristics : BaseCharacteristics
 {
+    
+    public string Name { get; private set; }
     public WeaponType WeaponType { get; private set; }
 
     public Stat BulletSpeed { get; private set; }
@@ -13,6 +15,7 @@ public class WeaponCharacteristics : BaseCharacteristics
 
     public WeaponCharacteristics(WeaponSO weaponStats)
     {
+        Name = weaponStats.name;
         WeaponType = weaponStats.WeaponType;
 
         BulletSpeed = new(weaponStats.BulletSpeed);

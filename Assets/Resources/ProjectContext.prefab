@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5267055037541093505}
   - component: {fileID: 1172307258825653352}
-  - component: {fileID: -2026153891105483010}
+  - component: {fileID: 7451232918169396476}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: -2026153891105483010}
+  - {fileID: 7451232918169396476}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
       _missingHandlerDefaultResponse: 2
       _requireStrictUnsubscribe: 0
       _defaultAsyncTickPriority: 1
---- !u!114 &-2026153891105483010
+--- !u!114 &7451232918169396476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,12 +71,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8898222847242725027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480e77d9be6da1941ac277846a7e665f, type: 3}
+  m_Script: {fileID: 11500000, guid: b2d978099195a5645afdb09ecdc4a30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hudPrefab: {fileID: 95651243098220048, guid: ba268053fecaa15488a4c87936590ba9, type: 3}
-  _bulletPrefab: {fileID: -8568652311716268270, guid: 55d241526f467e1488bfdca695974aee, type: 3}
-  _playerPrefab: {fileID: 2290216892235248199, guid: 0acd365c113d7ea4abffd126dac1fd96, type: 3}
-  _cameraPrefab: {fileID: 5130961125699588083, guid: 8316abc827b88084e96f8d4023b234fe, type: 3}
-  _enemySpawnPrefab: {fileID: 6655857326069907471, guid: 04d4b8e267020a348891cc0bc901886e, type: 3}
-  _projectilePrefab: {fileID: 8598036695169180062, guid: b62a243981d4f8345a02f8a743907435, type: 3}
+  _weaponSO:
+  - {fileID: 11400000, guid: 16da474328d646348bbacfaa7f41ecdb, type: 2}
+  - {fileID: 11400000, guid: a33b99343ae7f4b41976f948a7897ff6, type: 2}
+  - {fileID: 11400000, guid: 60a4418ef8eeae34eb5b89adbeaaf9f3, type: 2}
+  - {fileID: 11400000, guid: 87a34b037884f604196d9e8aad282cc9, type: 2}

@@ -1,35 +1,27 @@
+﻿using System;
 using UnityEngine;
 using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
-    [SerializeField] private HUD _hudPrefab;
-    [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private Player _playerPrefab;
-    [SerializeField] private CameraFollow _cameraPrefab;
-    [SerializeField] private EnemySpawnManager _enemySpawnPrefab;
-    [SerializeField] private Projectile _projectilePrefab;
+  
+    [SerializeField] private WeaponSO[] _weaponSO;
 
     public override void InstallBindings()
     {
-        Container.Bind<BulletFactory>().AsSingle();
-        Container.BindMemoryPool<Bullet, Bullet.Pool>().FromComponentInNewPrefab(_bulletPrefab);
+        InstallWeaponSelection();
 
-        Container.Bind<ProjectileFactory>().FromNew().AsSingle();
-        Container.BindMemoryPool<Projectile, Projectile.Pool>().FromComponentInNewPrefab(_projectilePrefab);
+        InstallWeapon();
+    }
 
-        var player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab);
-        Container.Bind<Player>().FromInstance(player).AsSingle();
+    private void InstallWeaponSelection() => 
+        Container.Bind<WeaponSelection>().FromNew().AsSingle().NonLazy();
 
-        var hud = Container.InstantiatePrefabForComponent<HUD>(_hudPrefab);
-        Container.Bind<HUD>().FromInstance(hud).AsSingle();
-
-        var camera = Container.InstantiatePrefabForComponent<CameraFollow>(_cameraPrefab);
-        camera.Follow(player.transform);
-
-        var spawner = Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);
-        Container.Bind<EnemySpawnManager>().FromInstance(spawner).AsSingle().NonLazy();
-
-        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+    private void InstallWeapon()
+    {
+        foreach (var weapon in _weaponSO)
+        {
+            Container.Bind<WeaponCharacteristics>().FromNew().AsTransient().WithArguments(weapon).NonLazy();
+        }
     }
 }

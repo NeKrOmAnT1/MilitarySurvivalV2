@@ -7,11 +7,16 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform _bulletspawnPoint;
     [SerializeField] private LayerMask enemyMask;
 
+    [Space, SerializeField] private GameObject _testObject;
+
     private float _nextFire = 0.0f;
     private SideType _side;
+    
+    private BulletFactory _bulletFactory;
 
     [Inject]
-    private readonly BulletFactory _bulletFactory;
+    private void Construct(BulletFactory bulletFactory) => 
+        _bulletFactory = bulletFactory;
 
     private void Start() => 
         _side = _player.SideType;
@@ -55,8 +60,16 @@ public class PlayerAttack : MonoBehaviour
                 }
                 break;
             case WeaponType.Melee:
+
                 Collider[] hitEnemies = Physics.OverlapSphere(transform.forward * _player.WeaponCharacteristics.Distance.Value, 
                     _player.WeaponCharacteristics.DamageArea.Value, enemyMask);
+
+                // for test
+                var r = _player.WeaponCharacteristics.DamageArea.Value;
+                _testObject.transform.localScale = new Vector3(r,r,r);
+                _testObject.transform.position = transform.forward * _player.WeaponCharacteristics.Distance.Value;
+                //for test end
+
                 foreach (Collider collider in hitEnemies)
                 {
                     if(collider.GetComponent<IDamagable>() != null && collider.GetComponent<IDamagable>().SideType != _player.SideType)

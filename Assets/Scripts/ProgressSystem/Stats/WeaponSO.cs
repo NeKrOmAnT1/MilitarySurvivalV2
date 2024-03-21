@@ -1,9 +1,12 @@
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "DefaultWeaponSO", menuName = "WeaponSO")]
+[CreateAssetMenu(fileName = "DefaultWeaponSO", menuName = "_weaponSO")]
 public class WeaponSO : ScriptableObject
 {
+    [field: SerializeField]
+    public string WeaponName { get; private set; }
+
     [field: SerializeField, Tooltip("Ranged/Melee")]
     public WeaponType WeaponType { get; private set; }
 
@@ -29,22 +32,6 @@ public class WeaponSO : ScriptableObject
 
     [field: Space, SerializeField, Tooltip("Ranged: Area of explosive projectiles / Melee: Radius of attack")]
     public float DamageArea { get; private set; }
-
-    /// <summary>
-    /// It's likely to have default SO remain unchanged
-    /// </summary>
-    /// <param name="temp">An WeaponSO that already exists and is configured with default values </param>
-    /*public WeaponSO(WeaponSO temp)
-    {
-        AttackSpeed = temp.AttackSpeed;
-        CoolDown = temp.CoolDown;
-        DamageDealt = temp.DamageDealt;
-        Distance = temp.Distance;
-        SpreadAngle = temp.SpreadAngle;
-        BulletsNumber = temp.BulletsNumber;
-
-        DamageArea = temp.DamageArea;
-    }*/
 }
 
 

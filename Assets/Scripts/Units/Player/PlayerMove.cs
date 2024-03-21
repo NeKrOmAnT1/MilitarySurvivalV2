@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class PlayerMove : MonoBehaviour
     private Camera _mainCamera;
     private Vector3 _directionMove;
 
-    private void Awake()
+    [Inject]
+    private void Construct(CameraFollow camera)
     {
+        _mainCamera = camera.GetComponent<Camera>();
         _controls = new();
-        _mainCamera = Camera.main;
     }
 
     private void OnEnable() => 
@@ -36,7 +38,6 @@ public class PlayerMove : MonoBehaviour
 
         _controller.Move(_player.PlayerCharacteristics.MoveSpeed.Value * Time.deltaTime * _directionMove);
         RotationPlayer();
-
     }
 
     private void ReadMousePoint()
