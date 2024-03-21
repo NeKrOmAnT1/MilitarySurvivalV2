@@ -8,6 +8,7 @@ TagManager:
   - Projectile1
   - Spit1
   - Ram1
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Floor
   - Player
   - Expl
-  - 
+  - Projectile
   - 
   - 
   - 

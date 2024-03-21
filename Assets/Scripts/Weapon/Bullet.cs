@@ -24,11 +24,10 @@ public class Bullet : MonoBehaviour
         _characteristics = weapon;
         _direction = dir.normalized;
         _factory = factory;
-    }
 
-    private void Start() =>
         // Уничтожаем пулю через заданное время
         StartCoroutine(DestriyRoutine());
+    }
 
     private void Update() =>
         // Двигаем пулю в заданном направлении

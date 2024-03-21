@@ -6,10 +6,18 @@ public class ProjectileEnemy : Enemy, ICanAttack
 {
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GameObject _projectilePrefab;
-    private ProjectileFactory _projectileFactory; //crutch
+
+    [Inject]  private ProjectileFactory _projectileFactory; //crutch
 
     private bool _isAttack = false;
     private float _timer = 0;
+
+    //[Inject]
+    //public void Construct(ProjectileFactory projectileFactory)
+    //{
+    //    _projectileFactory = projectileFactory;
+    //    Debug.Log(_projectileFactory);
+    //}
 
     public void AttackProcess()
     {
@@ -25,10 +33,8 @@ public class ProjectileEnemy : Enemy, ICanAttack
         }
     }
 
-    private void StartAttack()
-    {
+    private void StartAttack() => 
         _isAttack = false;
-    }
 
     private void InitBullet()
     {
@@ -37,10 +43,15 @@ public class ProjectileEnemy : Enemy, ICanAttack
         projectile.Init(_playerHealth, _damage, Target);
         projectile.Launch();
 
-        //_projectileFactory.SpawnProjectile(this.transform.position, _playerHealth, _damage, Target)
+        //Debug.Log(_projectileFactory);
+        //Debug.Log(_playerHealth);
+        //Debug.Log(_damage);
+        //Debug.Log(Target);
+
+        //_projectileFactory.SpawnProjectile(this.transform.position, _playerHealth, _damage)
         //    .Launch();
     }
 
-    public void DetFactory(ProjectileFactory projectileFactory) =>//crutch
+    public void SetFactory(ProjectileFactory projectileFactory) =>//crutch
         _projectileFactory = projectileFactory;
 }

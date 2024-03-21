@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 6743913649368407601}
+  _deathFXPrefab: {fileID: 7226888052703040409, guid: 7ec363c8df426644ea85f8d6d570561c, type: 3}
 --- !u!1 &8155796096884399599
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,8 +67,8 @@ public class GamePlayInstaller : MonoInstaller
         Container.Bind<BulletFactory>().AsSingle();
         Container.BindMemoryPool<Bullet, Bullet.Pool>().FromComponentInNewPrefab(_bulletPrefab);
 
-        Container.Bind<ProjectileFactory>().FromNew().AsSingle();
-        Container.BindMemoryPool<Projectile, Projectile.Pool>().FromComponentInNewPrefab(_projectilePrefab);
+        //Container.Bind<ProjectileFactory>().AsSingle().NonLazy();
+        //Container.BindMemoryPool<Projectile, Projectile.Pool>().FromComponentInNewPrefab(_projectilePrefab);
     }
 
     private void InstallPlayerCharacteristics()

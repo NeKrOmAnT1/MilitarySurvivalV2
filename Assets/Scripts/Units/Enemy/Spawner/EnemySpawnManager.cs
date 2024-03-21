@@ -14,8 +14,10 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private StepSpawnConfig[] stepSpawnConfigs;
 
-    [Inject] private Player _player;
-    [Inject] private ProjectileFactory _projectileFactory;
+    //[Inject] 
+    private Player _player;
+    //[Inject]
+   //private ProjectileFactory _projectileFactory;
 
     private Transform target;
     private PlayerHealth playerHealth;
@@ -25,14 +27,20 @@ public class EnemySpawnManager : MonoBehaviour
     public int startPoolSize = 10;
 
     private const string SOPath = "DefaultSO/DefaultPlayerSO";
-    private PlayerCharacteristics _characteristics;
+    private PlayerCharacteristics _playerCharacteristics;
+
+    [Inject]
+    private void Construct(Player player, PlayerCharacteristics characteristics)//, ProjectileFactory projectileFactory)
+    {
+        _player = player;
+        _playerCharacteristics = characteristics;
+        //_projectileFactory = projectileFactory;
+        target = _player.transform;
+        playerHealth = _player.PlayerHealth;
+    }
 
     private void Start()
     {
-        target = _player.transform;
-        playerHealth = _player.PlayerHealth;
-
-
         enemyPools = new Dictionary<string, EnemyPool<Transform>>();
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
@@ -40,7 +48,6 @@ public class EnemySpawnManager : MonoBehaviour
             enemyPools.Add(enemyPrefabs[i].tag, new EnemyPool<Transform>(enemyPrefabs[i].GetComponent<Transform>(),
                                                                       startPoolSize,
                                                                       enemyContainer.transform));
-            // Debug.Log("Нажмите Space для следующей волны противников");
         }
 
 
@@ -48,7 +55,7 @@ public class EnemySpawnManager : MonoBehaviour
     }
 
     private PlayerCharacteristics DefaultCharacteristicsImplementation() =>
-        _characteristics = new(Instantiate(Resources.Load<PlayerSO>(SOPath)));
+        _playerCharacteristics = new(Instantiate(Resources.Load<PlayerSO>(SOPath)));
 
     private void StartNextSpawnStep()
     {
@@ -103,8 +110,10 @@ public class EnemySpawnManager : MonoBehaviour
         var Enemy = enemy.GetComponent<Enemy>();
         Enemy.Init(playerHealth, target);
 
-        if (Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy)) //crutch
-            projectileEnemy.DetFactory(_projectileFactory);
+        //if (Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy)) //crutch
+        //{
+        //    projectileEnemy.SetFactory(_projectileFactory);
+        //}
 
         OnSpawned?.Invoke(Enemy.GetComponent<EnemyDeath>());
     }
