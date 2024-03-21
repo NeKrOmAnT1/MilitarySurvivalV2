@@ -20,8 +20,7 @@ public class CameraFollow : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(RotationAngleX, 0, 0);
         Vector3 position = rotation * new Vector3(0, 0, -Ditance) + FollowingPointPosition();
 
-        transform.rotation = rotation;
-        transform.position = Vector3.Lerp(transform.position, position, _speed * Time.deltaTime);
+        transform.SetPositionAndRotation(Vector3.Lerp(transform.position, position, _speed * Time.deltaTime), rotation);
     }
 
     private Vector3 FollowingPointPosition()

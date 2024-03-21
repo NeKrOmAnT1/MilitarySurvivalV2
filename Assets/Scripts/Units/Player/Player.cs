@@ -34,14 +34,11 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
 
     public void Awake()
     {
-
         SideType = SideType.ALLY;
-
-        
 
         PlayerHealth = new(this);
 
-        var squad = Instantiate(squadPrefab).GetComponent<SquadScript>();
-        squad.Initialization(transform);
+        Instantiate(squadPrefab).GetComponent<SquadScript>()
+        .Initialization(transform);
     }
 }

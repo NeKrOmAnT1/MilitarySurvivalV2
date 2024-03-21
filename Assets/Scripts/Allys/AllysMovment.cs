@@ -7,7 +7,7 @@ public class AllysMovement : MonoBehaviour
     private float _moveSpeed = 5f;
     private Vector2 _directionAnimation;
     private Transform _pointTransform;
-    private PlayerView playerView;
+    private PlayerView _playerView;
     
     public Vector3 MousePoint { get; private set; }
 
@@ -15,14 +15,13 @@ public class AllysMovement : MonoBehaviour
     private void Awake()
     {
         _ally = GetComponent<Allys>();     
-        _controller = GetComponent<CharacterController>();       
-        playerView = new PlayerView(gameObject.GetComponent<Animator>());
+        _controller = GetComponent<CharacterController>(); 
+        
+        _playerView = new PlayerView(gameObject.GetComponent<Animator>());
     }
 
-    private void Start()
-    {
-        _pointTransform = SquadScript.PointsSquad[_ally.NumberAlly - 1].transform;     
-    }
+    private void Start() => 
+        _pointTransform = SquadScript.PointsSquad[_ally.NumberAlly - 1].transform;
 
     private void Update()
     {
@@ -52,12 +51,12 @@ public class AllysMovement : MonoBehaviour
             Vector3 direction = (_pointTransform.position - transform.position).normalized;
             _controller.Move(direction * _moveSpeed * Time.deltaTime);       
             Vector2 roundedDirection = new Vector2(Mathf.Round(_directionAnimation.x), Mathf.Round(_directionAnimation.y));
-            playerView.AnimationMove(roundedDirection);
+            _playerView.AnimationMove(roundedDirection);
         }
         else
         {          
             _directionAnimation = Vector2.zero;
-            playerView.AnimationMove(_directionAnimation);
+            _playerView.AnimationMove(_directionAnimation);
         }
         transform.rotation = _pointTransform.rotation;
     }

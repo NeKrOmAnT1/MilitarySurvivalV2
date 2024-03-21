@@ -23,10 +23,8 @@ public class SquadScript : MonoBehaviour
 
     public Transform PlayerTransform { get => _playerTransform;}
 
-    public void Initialization(Transform playerTransform)
-    {
+    public void Initialization(Transform playerTransform) => 
         _playerTransform = playerTransform;
-    }
 
     private void Start()
     {
@@ -48,7 +46,6 @@ public class SquadScript : MonoBehaviour
         if(_countPoints <= _maxPoints)
         {
             _countPoints++;
-            //_currentAlly += 1;
             SpawnAlly(1);
         }
         else
@@ -79,7 +76,6 @@ public class SquadScript : MonoBehaviour
 
         for (int i = 0; i < currentAlly; i++)
         {
-            //_countPoints++;
             SpawnPoint();
             SetPointsPosition();
             SpawnAllyPrefab(_pointsGameObjects[i].transform);
@@ -103,10 +99,9 @@ public class SquadScript : MonoBehaviour
             point.transform.position = point.transform.position + point.transform.forward * _distanceBehindPlayer;          
         }     
     }
-    private float GetAngle()
-    {
-        return 360f / (1 + _countPoints);
-    }
+    private float GetAngle() =>
+        360f / (1 + _countPoints);
+
     private void SpawnAllyPrefab(Transform point)
     {
         int count = 1;

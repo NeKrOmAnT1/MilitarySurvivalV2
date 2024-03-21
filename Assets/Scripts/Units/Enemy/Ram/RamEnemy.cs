@@ -12,6 +12,7 @@ public class RamEnemy : Enemy, ICanAttack
     private bool isCoolingDown = false;
     private bool isPlayerChangePos = false;
     private bool isAttacking = false;
+
     public void AttackProcess()
     {
         if (_enemyDeath.IsDead) return;
@@ -77,8 +78,10 @@ public class RamEnemy : Enemy, ICanAttack
             yield return null;
         }
         yield return new WaitForSeconds(1f);
+
         isCharging = false;
         _enemyMovement.enabled = true;
+
         StartCoroutine(AttackCooldown());
     }
 
@@ -89,9 +92,6 @@ public class RamEnemy : Enemy, ICanAttack
         isCoolingDown = false;
     }
 
-    private float GetDistance()
-    {
-        return Vector3.Distance(transform.position, Target.transform.position);
-    }
-
+    private float GetDistance() =>
+        Vector3.Distance(transform.position, Target.transform.position);
 }

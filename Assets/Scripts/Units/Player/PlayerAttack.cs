@@ -6,8 +6,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Transform _bulletspawnPoint;
     [SerializeField] private LayerMask _enemyMask;
-
-    [Space, SerializeField] private GameObject _testObject;
+    [Space]
+    [SerializeField] private GameObject _testObject;
 
     private float _nextFire = 0.0f;
     private SideType _side;

@@ -6,7 +6,6 @@ using Zenject;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-
     public event Action<EnemyDeath> OnSpawned;
 
     [Header("EnemySettings")]
@@ -14,10 +13,7 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private StepSpawnConfig[] stepSpawnConfigs;
 
-    //[Inject] 
     private Player _player;
-    //[Inject]
-   //private ProjectileFactory _projectileFactory;
 
     private Transform target;
     private PlayerHealth playerHealth;
@@ -26,15 +22,10 @@ public class EnemySpawnManager : MonoBehaviour
     private int currentStep = 0;
     public int startPoolSize = 10;
 
-    private const string SOPath = "DefaultSO/DefaultPlayerSO";
-    private PlayerCharacteristics _playerCharacteristics;
-
     [Inject]
-    private void Construct(Player player, PlayerCharacteristics characteristics)//, ProjectileFactory projectileFactory)
+    private void Construct(Player player)
     {
         _player = player;
-        _playerCharacteristics = characteristics;
-        //_projectileFactory = projectileFactory;
         target = _player.transform;
         playerHealth = _player.PlayerHealth;
     }
@@ -53,9 +44,6 @@ public class EnemySpawnManager : MonoBehaviour
 
         StartNextSpawnStep();
     }
-
-    private PlayerCharacteristics DefaultCharacteristicsImplementation() =>
-        _playerCharacteristics = new(Instantiate(Resources.Load<PlayerSO>(SOPath)));
 
     private void StartNextSpawnStep()
     {
@@ -110,15 +98,8 @@ public class EnemySpawnManager : MonoBehaviour
         var Enemy = enemy.GetComponent<Enemy>();
         Enemy.Init(playerHealth, target);
 
-        //if (Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy)) //crutch
-        //{
-        //    projectileEnemy.SetFactory(_projectileFactory);
-        //}
-
         OnSpawned?.Invoke(Enemy.GetComponent<EnemyDeath>());
     }
-    private Transform GetRandomSpawnPoint()
-    {
-        return spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-    }
+    private Transform GetRandomSpawnPoint() =>
+        spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 }

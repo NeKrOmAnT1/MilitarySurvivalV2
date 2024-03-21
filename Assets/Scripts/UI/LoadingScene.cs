@@ -8,10 +8,8 @@ public class LoadingScene : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private Image loadingBarFill;
 
-    public void LoadScene(int sceneId)
-    {
+    public void LoadScene(int sceneId) => 
         StartCoroutine(LoadSceneAsync(sceneId));
-    }
 
     IEnumerator LoadSceneAsync(int sceneId)
     {

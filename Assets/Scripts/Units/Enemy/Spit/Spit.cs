@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spit : MonoBehaviour
@@ -49,10 +47,8 @@ public class Spit : MonoBehaviour
         }
     }
 
-    private void Destroy()
-    {
+    private void Destroy() => 
         Destroy(gameObject);
-    }
 
     void DamagePlayer()
     {

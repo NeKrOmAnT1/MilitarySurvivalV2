@@ -2,8 +2,6 @@
 {
     public string CurrentWeaponName { get; private set; }
 
-    public void AddCurrentWeaponName(string currentWeaponName)
-    {
+    public void AddCurrentWeaponName(string currentWeaponName) =>
         CurrentWeaponName = currentWeaponName;
-    }
 }

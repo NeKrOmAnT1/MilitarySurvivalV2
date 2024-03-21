@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +8,6 @@ public class GamePlayInstaller : MonoInstaller
     [SerializeField] private Player _playerPrefab;
     [SerializeField] private CameraFollow _cameraPrefab;
     [SerializeField] private EnemySpawnManager _enemySpawnPrefab;
-    [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private PlayerSO _playerSO;
     [SerializeField] private Transform _playerSpawnPoint;
 
@@ -57,7 +55,7 @@ public class GamePlayInstaller : MonoInstaller
     private void InstallPlayer()
     {
         var player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab);
-        Container.Bind<Player>().FromInstance(player).AsSingle();
+        Container.Bind<Player>().FromInstance(player).AsSingle().NonLazy();
         player.transform.position = _playerSpawnPoint.position;
         _camera.Follow(player.transform);
     }
@@ -66,14 +64,8 @@ public class GamePlayInstaller : MonoInstaller
     {
         Container.Bind<BulletFactory>().AsSingle();
         Container.BindMemoryPool<Bullet, Bullet.Pool>().FromComponentInNewPrefab(_bulletPrefab);
-
-        //Container.Bind<ProjectileFactory>().AsSingle().NonLazy();
-        //Container.BindMemoryPool<Projectile, Projectile.Pool>().FromComponentInNewPrefab(_projectilePrefab);
     }
 
-    private void InstallPlayerCharacteristics()
-    {
+    private void InstallPlayerCharacteristics() => 
         Container.Bind<PlayerCharacteristics>().FromNew().AsSingle().WithArguments(_playerSO).NonLazy();
-       
-    }
 }

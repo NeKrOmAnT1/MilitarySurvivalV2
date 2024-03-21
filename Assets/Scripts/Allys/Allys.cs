@@ -1,4 +1,5 @@
 using UnityEngine;
+
 [RequireComponent(typeof(Animator))]
 public class Allys : MonoBehaviour
 {
@@ -12,10 +13,5 @@ public class Allys : MonoBehaviour
         _numberAlly = ++_countAllys;
 
         gameObject.AddComponent<AllysMovement>();
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 }
