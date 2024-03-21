@@ -5,7 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Transform _bulletspawnPoint;
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private LayerMask _enemyMask;
 
     [Space, SerializeField] private GameObject _testObject;
 
@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
             case WeaponType.Melee:
 
                 Collider[] hitEnemies = Physics.OverlapSphere(transform.forward * _player.WeaponCharacteristics.Distance.Value, 
-                    _player.WeaponCharacteristics.DamageArea.Value, enemyMask);
+                    _player.WeaponCharacteristics.DamageArea.Value, _enemyMask);
 
                 // for test
                 var r = _player.WeaponCharacteristics.DamageArea.Value;

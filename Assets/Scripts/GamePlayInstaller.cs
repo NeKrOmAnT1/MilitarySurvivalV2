@@ -11,6 +11,9 @@ public class GamePlayInstaller : MonoInstaller
     [SerializeField] private EnemySpawnManager _enemySpawnPrefab;
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private PlayerSO _playerSO;
+    [SerializeField] private Transform _playerSpawnPoint;
+
+
     private CameraFollow _camera;
 
     public override void InstallBindings()
@@ -55,6 +58,7 @@ public class GamePlayInstaller : MonoInstaller
     {
         var player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab);
         Container.Bind<Player>().FromInstance(player).AsSingle();
+        player.transform.position = _playerSpawnPoint.position;
         _camera.Follow(player.transform);
     }
 

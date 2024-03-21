@@ -6,11 +6,13 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private CharacterController _controller;
+    [SerializeField] private Animator _animator;
 
     public Transform PlayerTransform { get; private set; }
 
     private Vector3 _mousePoint;
     private Controls _controls;
+    private PlayerView _playerView;
     private Camera _mainCamera;
     private Vector3 _directionMove;
 
@@ -19,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     {
         _mainCamera = camera.GetComponent<Camera>();
         _controls = new();
+
+        _playerView = new PlayerView(_animator);
     }
 
     private void OnEnable() => 
@@ -38,6 +42,8 @@ public class PlayerMove : MonoBehaviour
 
         _controller.Move(_player.PlayerCharacteristics.MoveSpeed.Value * Time.deltaTime * _directionMove);
         RotationPlayer();
+
+        //todo player PlayerView
     }
 
     private void ReadMousePoint()
