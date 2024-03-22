@@ -61,10 +61,10 @@ MonoBehaviour:
   - {fileID: 800935382307507185}
   - {fileID: 2183961120122100138}
   stepSpawnConfigs:
-  - melee1EnemyAmount: 2
-    ram1EnemyAmount: 2
-    spit1EnemyAmount: 2
-    projectile1EnemyAmount: 2
+  - melee1EnemyAmount: 6
+    ram1EnemyAmount: 6
+    spit1EnemyAmount: 6
+    projectile1EnemyAmount: 6
     spawnTime: 20
   startPoolSize: 10
 --- !u!1 &4062401766149362235

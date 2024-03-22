@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         _controller.Move(_player.PlayerCharacteristics.MoveSpeed.Value * Time.deltaTime * _directionMove);
         RotationPlayer();
 
-        //todo player PlayerView
+        _playerView.AnimationMove(moveInput);
     }
 
     private void ReadMousePoint()
