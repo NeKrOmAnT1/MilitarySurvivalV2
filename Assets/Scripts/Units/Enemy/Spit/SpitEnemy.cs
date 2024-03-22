@@ -1,18 +1,22 @@
+using System.ComponentModel;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UIElements;
 
 public class SpitEnemy : Enemy, ICanAttack
 {
-    [SerializeField] private GameObject _spitPrefab;
-    [SerializeField] private Spit _testspitPrefab;
+    [SerializeField] private Spit _spitPrefab;
     [SerializeField] private int _bulletsPoolSize = 20;
 
     private bool _isAttack = false;
     private float _timer = 0;
+    private EnemyPool<Spit> _pool;
 
-    private EnemyBulletFactory _bulletFactory;
+    //private EnemyBulletFactory _bulletFactory;
 
-    private void Start() => 
-        _bulletFactory = new(_testspitPrefab, this.transform, _bulletsPoolSize, _playerHealth/*, Target*/, _damage);
+    private void Start() =>
+        _pool = new EnemyPool<Spit>(_spitPrefab, _bulletsPoolSize, this.transform);
+    //_bulletFactory = new(_testspitPrefab, this.transform, _bulletsPoolSize, _playerHealth/*, Target*/, _damage);
     
     private void SpittingAttack()
     {
@@ -23,8 +27,10 @@ public class SpitEnemy : Enemy, ICanAttack
 
         //spitComponent.Initialize(_playerHealth, Target.position, _damage);
 
-        _bulletFactory.Spawn(transform.position, Target.position);
-        
+        //_bulletFactory.Spawn(transform.position, Target.position);
+        var proj = _pool.GetObject();
+        proj.transform.position = transform.position;
+        proj.Initialize(_playerHealth, _damage, Target, _pool);
         _isAttack = false;
     }
 

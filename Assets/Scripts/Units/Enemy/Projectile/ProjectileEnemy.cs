@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Zenject;
 
 public class ProjectileEnemy : Enemy, ICanAttack
 {
@@ -10,10 +8,13 @@ public class ProjectileEnemy : Enemy, ICanAttack
 
     private bool _isAttack = false;
     private float _timer = 0;
-    private EnemyBulletFactory _bulletFactory;
 
-    private void Start() =>
-        _bulletFactory = new(_projectilePrefab, this.transform, _bulletsPoolSize, _playerHealth/*, Target*/, _damage);
+    private EnemyPool<Projectile> _pool;
+
+    private void Start()
+    {
+        _pool = new(_projectilePrefab, _bulletsPoolSize, this.transform);
+    }
 
     public void AttackProcess()
     {
@@ -36,13 +37,13 @@ public class ProjectileEnemy : Enemy, ICanAttack
     {
         //GameObject bullet = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
         //var projectile = bullet.GetComponent<Projectile>();
-        //projectile.Initialize(_playerHealth, _damage, Target, _bulletFactory);
+        //projectile.Init(_playerHealth, _damage, Target);
         //projectile.Launch();
-        Debug.Log("InitBullet");
-        Debug.Log(_bulletFactory);
 
-        var projectile = _bulletFactory.Spawn(transform.position, Target.position);
-        Debug.Log(Target.position);
-        projectile.GetComponent<Projectile>().Launch();
+        var bullet = _pool.GetObject();
+        bullet.transform.parent = null;
+        var projectile = bullet.GetComponent<Projectile>();
+        projectile.Init(_playerHealth, _damage, Target);
+        projectile.Launch();
     }
 }

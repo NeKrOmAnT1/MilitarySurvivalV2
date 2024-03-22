@@ -1,25 +1,25 @@
 using UnityEngine;
 
-public class Spit : BaseProjectile
+public class Spit : MonoBehaviour
 {
     [SerializeField] private float _lifetime = 20;
     
     private PlayerHealth PlayerHealth;
     private Vector3 Target;
+    private EnemyPool<Spit> _pool;
     private Quaternion TargetRotation;
-
-    private EnemyBulletFactory _factory;
 
     public float speed = 5f;
     public float Damage = 5;
     public float timer = 5f;
 
-    public override void Initialize(PlayerHealth playerHealth, float damage, Vector3 target, EnemyBulletFactory factory)
+    public void Initialize(PlayerHealth playerHealth, float damage, Transform target, EnemyPool<Spit> pool)//, EnemyBulletFactory factory)
     {
         this.PlayerHealth = playerHealth;
         this.Damage = damage;
-        this.Target = target;
-        _factory = factory;
+        this.Target = target.position;
+        _pool = pool;
+        // _factory = factory;
 
         timer = _lifetime;
     }
@@ -61,7 +61,6 @@ public class Spit : BaseProjectile
             DamagePlayer();
 
             // Destroy the spit object
-            Debug.Log("OnTriggerEnter Destroy");
             Destroy();
         }
     }
@@ -69,7 +68,7 @@ public class Spit : BaseProjectile
     private void Destroy()
     {
         //Destroy(gameObject);
-        _factory.DeSpawn(this);
+        _pool.ReturnObject(this);
     }
 
     void DamagePlayer()

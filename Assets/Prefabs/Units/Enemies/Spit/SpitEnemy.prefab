@@ -301,8 +301,7 @@ MonoBehaviour:
   _damage: 5
   _attackDelay: 3
   _xpForKilling: 20
-  _spitPrefab: {fileID: 2139618514437650822, guid: 4af206896089f144ba373df8f7fd80de, type: 3}
-  _testspitPrefab: {fileID: -4043252669495967907, guid: 4af206896089f144ba373df8f7fd80de, type: 3}
+  _spitPrefab: {fileID: -4043252669495967907, guid: 4af206896089f144ba373df8f7fd80de, type: 3}
   _bulletsPoolSize: 20
 --- !u!114 &3493805141865592305
 MonoBehaviour:
