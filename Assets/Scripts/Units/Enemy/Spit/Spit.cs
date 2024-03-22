@@ -1,21 +1,38 @@
 using UnityEngine;
 
-public class Spit : MonoBehaviour
+public class Spit : BaseProjectile
 {
+    [SerializeField] private float _lifetime = 20;
+    
     private PlayerHealth PlayerHealth;
     private Vector3 Target;
     private Quaternion TargetRotation;
+
+    private EnemyBulletFactory _factory;
 
     public float speed = 5f;
     public float Damage = 5;
     public float timer = 5f;
 
-    public void Initialize(PlayerHealth playerHealth, Vector3 Target, float damage)
+    public override void Initialize(PlayerHealth playerHealth, float damage, Vector3 target, EnemyBulletFactory factory)
     {
         this.PlayerHealth = playerHealth;
         this.Damage = damage;
-        this.Target = Target;
+        this.Target = target;
+        _factory = factory;
+
+        timer = _lifetime;
     }
+
+    //public void Initialize(PlayerHealth playerHealth, Vector3 Target, float damage, EnemyBulletFactory factory)
+    //{
+    //    this.PlayerHealth = playerHealth;
+    //    this.Damage = damage;
+    //    this.Target = Target;
+    //    _factory = factory;
+
+    //    timer = _lifetime;
+    //}
 
     private void Start()
     {
@@ -31,6 +48,7 @@ public class Spit : MonoBehaviour
         if (timer < 0f)
         {
             Destroy();
+            Debug.Log("timer Destroy");
         }
     }
 
@@ -43,12 +61,16 @@ public class Spit : MonoBehaviour
             DamagePlayer();
 
             // Destroy the spit object
+            Debug.Log("OnTriggerEnter Destroy");
             Destroy();
         }
     }
 
-    private void Destroy() => 
-        Destroy(gameObject);
+    private void Destroy()
+    {
+        //Destroy(gameObject);
+        _factory.DeSpawn(this);
+    }
 
     void DamagePlayer()
     {

@@ -35,7 +35,7 @@ public class EnemySpawnManager : MonoBehaviour
         enemyPools = new Dictionary<string, EnemyPool<Transform>>();
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
-            GameObject enemyContainer = new GameObject(enemyPrefabs[i].tag + "_Container");
+            GameObject enemyContainer = new(enemyPrefabs[i].tag + "_Container");
             enemyPools.Add(enemyPrefabs[i].tag, new EnemyPool<Transform>(enemyPrefabs[i].GetComponent<Transform>(),
                                                                       startPoolSize,
                                                                       enemyContainer.transform));
@@ -57,7 +57,7 @@ public class EnemySpawnManager : MonoBehaviour
     private IEnumerator SpawnEnemiesOnStep(StepSpawnConfig stepConfig)
     {
         float totalEnemiesToSpawn = stepConfig.GetAllAmountEnemy();
-        List<string> enemyTypes = new List<string>();
+        List<string> enemyTypes = new();
 
         for (int i = 0; i < stepConfig.melee1EnemyAmount; i++)
             enemyTypes.Add("Melee1");

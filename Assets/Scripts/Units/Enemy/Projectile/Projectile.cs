@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 using static UnityEngine.GraphicsBuffer;
 
-public class Projectile : MonoBehaviour
+public class Projectile : BaseProjectile
 {
     public class Pool : MonoMemoryPool<Projectile> { }
 
@@ -18,22 +18,38 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _damageArea = 10f;
     [SerializeField] private float _timeToDelete = 2f;
 
-    private Transform _target;
+    private Vector3 _target;
     private PlayerHealth _playerHealth;
     private float _damage;
     private Vector3 _attackPos;
+    private EnemyBulletFactory _factory;
 
-    public void Init(PlayerHealth playerHealth, float damage, Transform target)
+    public override void Initialize(PlayerHealth playerHealth, float damage, Vector3 target, 
+        EnemyBulletFactory factory)
     {
+        Debug.Log(target);
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
+        _factory = factory;
 
         _rigidbody.useGravity = false;
 
-        _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
+        _attackPos = new Vector3(target.x, -0.95f, target.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
+
+    //public void Init(PlayerHealth playerHealth, float damage, Transform target)
+    //{
+    //    _target = target;
+    //    _playerHealth = playerHealth;
+    //    _damage = damage;
+
+    //    _rigidbody.useGravity = false;
+
+    //    _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
+    //    _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
+    //}
 
     public void Launch()
     {
@@ -44,8 +60,8 @@ public class Projectile : MonoBehaviour
 
     private LaunchData CalculateLaunchData()
     {
-        float displacementY = _target.position.y - _rigidbody.position.y;
-        Vector3 displacementXZ = new(_target.position.x - _rigidbody.position.x, 0, _target.position.z - _rigidbody.position.z);
+        float displacementY = _target.y - _rigidbody.position.y;
+        Vector3 displacementXZ = new(_target.x - _rigidbody.position.x, 0, _target.z - _rigidbody.position.z);
         float time = Mathf.Sqrt(-2 * _h / _gravity) + Mathf.Sqrt(2 * (displacementY - _h) / _gravity);
         Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity * _h);
         Vector3 velocityXZ = displacementXZ / time;
