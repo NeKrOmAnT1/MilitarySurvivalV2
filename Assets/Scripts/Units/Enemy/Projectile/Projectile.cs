@@ -1,8 +1,9 @@
 using UnityEngine;
-using Zenject;
 
 public class Projectile : MonoBehaviour
 {
+    //public class Pool : MonoMemoryPool<Projectile> { }
+
     [SerializeField] private GameObject _targetPrefab;
     [SerializeField] private GameObject _targetDamagePrefab;
     [Space]
@@ -20,11 +21,14 @@ public class Projectile : MonoBehaviour
     private float _damage;
     private Vector3 _attackPos;
 
-    public void Init(PlayerHealth playerHealth, float damage, Transform target)
+    //private ProjectileFactory _factory;
+
+    public void Init(PlayerHealth playerHealth, float damage, Transform target)//, ProjectileFactory factory)
     {
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
+        //_factory = factory;
 
         _rigidbody.useGravity = false;
 
@@ -56,9 +60,10 @@ public class Projectile : MonoBehaviour
         _exp.DeleteSphere();
         _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
 
-        //this.gameObject.SetActive(false);//temporary
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);//temporary
+        // Destroy(this.gameObject);
         //Invoke("DeleteBullet", _timeToDelete);
+        //_factory.RemoveProjectile(this);
     }
 
     private void Damage()

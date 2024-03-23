@@ -7,13 +7,17 @@ public class ProjectileFactory
     //private readonly List<Projectile> _projectiles = new();
 
     //[Inject] private readonly Projectile.Pool _projectilesPool;
+    //[Inject] private Player _player;
 
-    //public Projectile SpawnProjectile(Vector3 position, PlayerHealth playerHealth, float damage)
+    //public Projectile SpawnProjectile(Transform spawnTransform, float damage)
     //{
     //    var projectile = _projectilesPool.Spawn();
     //    _projectiles.Add(projectile);
-    //    projectile.transform.position = position;
-    //    //projectile.Init(damage);
+    //    projectile.transform.SetPositionAndRotation(spawnTransform.position, spawnTransform.rotation);
+
+    //    projectile.Init(_player.PlayerHealth, damage, _player.transform, this);
+    //    projectile.Launch();
+
     //    return projectile;
     //}
 

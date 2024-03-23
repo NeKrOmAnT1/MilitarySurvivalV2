@@ -17,17 +17,19 @@ public class EnemySpawnManager : MonoBehaviour
 
     private Transform target;
     private PlayerHealth playerHealth;
+    ///private ProjectileFactory _projectileFactory;
 
     private Dictionary<string, EnemyPool<Transform>> enemyPools;
     private int currentStep = 0;
     public int startPoolSize = 10;
 
     [Inject]
-    private void Construct(Player player)
+    private void Construct(Player player)//, ProjectileFactory projectileFactory)
     {
         _player = player;
         target = _player.transform;
         playerHealth = _player.PlayerHealth;
+        //_projectileFactory = projectileFactory;
     }
 
     private void Start()
@@ -97,7 +99,10 @@ public class EnemySpawnManager : MonoBehaviour
         enemy.position = randomSpawnPoint.position;
         var Enemy = enemy.GetComponent<Enemy>();
         Enemy.Init(playerHealth, target);
-
+        /////////////////////////////////////////////////////////////
+        //if (Enemy.TryGetComponent<ProjectileEnemy>(out var projEnemy))
+        //    projEnemy.AddFActory(_projectileFactory);
+        /////////////////////////////////////////////////////////////
         OnSpawned?.Invoke(Enemy.GetComponent<EnemyDeath>());
     }
     private Transform GetRandomSpawnPoint() =>
