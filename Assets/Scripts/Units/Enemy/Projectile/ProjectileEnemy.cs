@@ -44,8 +44,8 @@ public class ProjectileEnemy : Enemy, ICanAttack
         //_projectileFactory.SpawnProjectile(transform, _damage);
 
         Projectile projectile = _pool.GetObject();
-        projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        projectile.Init(_playerHealth, _damage, Target);
+        projectile.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+        projectile.Init(transform.rotation, _playerHealth, _damage, Target);
         projectile.Launch();
     }
 

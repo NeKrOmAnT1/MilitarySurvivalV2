@@ -23,15 +23,14 @@ public class Projectile : MonoBehaviour
 
     //private ProjectileFactory _factory;
 
-    public void Init(PlayerHealth playerHealth, float damage, Transform target)//, ProjectileFactory factory)
+    public void Init(Quaternion rot, PlayerHealth playerHealth, float damage, Transform target)//, ProjectileFactory factory)
     {
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
         //_factory = factory;
-
         _rigidbody.useGravity = false;
-
+        transform.rotation = rot;
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
