@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Zenject;
 
 public class ProjectileEnemy : Enemy, ICanAttack
 {
@@ -24,7 +22,7 @@ public class ProjectileEnemy : Enemy, ICanAttack
         }
     }
 
-    private void StartAttack() => 
+    private void StartAttack() =>
         _isAttack = false;
 
     private void InitBullet()

@@ -56,7 +56,7 @@ public class GamePlayInstaller : MonoInstaller
     {
         var player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab);
         Container.Bind<Player>().FromInstance(player).AsSingle().NonLazy();
-        player.transform.position = _playerSpawnPoint.position;
+        player.gameObject.transform.position = _playerSpawnPoint.position;
         _camera.Follow(player.transform);
     }
 

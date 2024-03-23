@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
     public WeaponCharacteristics WeaponCharacteristics { get; private set; }
 
 
-    private Dictionary<string, WeaponCharacteristics> _weapons = new();
+    private readonly Dictionary<string, WeaponCharacteristics> _weapons = new();
 
     [Inject]
     private void Construct(PlayerCharacteristics playerCharacteristics, WeaponCharacteristics[] weaponCharacteristics, 

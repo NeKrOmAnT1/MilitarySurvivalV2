@@ -1,11 +1,8 @@
 using UnityEngine;
 using Zenject;
-using static UnityEngine.GraphicsBuffer;
 
 public class Projectile : MonoBehaviour
 {
-    public class Pool : MonoMemoryPool<Projectile> { }
-
     [SerializeField] private GameObject _targetPrefab;
     [SerializeField] private GameObject _targetDamagePrefab;
     [Space]
@@ -59,8 +56,8 @@ public class Projectile : MonoBehaviour
         _exp.DeleteSphere();
         _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
 
-        this.gameObject.SetActive(false);//temporary
-
+        //this.gameObject.SetActive(false);//temporary
+        Destroy(this.gameObject);
         //Invoke("DeleteBullet", _timeToDelete);
     }
 
