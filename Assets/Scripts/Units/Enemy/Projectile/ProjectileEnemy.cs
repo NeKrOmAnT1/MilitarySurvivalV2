@@ -3,18 +3,10 @@ using UnityEngine;
 public class ProjectileEnemy : Enemy, ICanAttack
 {
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private Projectile _projectilePrefab;
-    [SerializeField] private int _bulletsPoolSize = 20;
+    [SerializeField] private GameObject _projectilePrefab;
 
     private bool _isAttack = false;
     private float _timer = 0;
-
-    private EnemyPool<Projectile> _pool;
-
-    private void Start()
-    {
-        _pool = new(_projectilePrefab, _bulletsPoolSize, this.transform);
-    }
 
     public void AttackProcess()
     {
@@ -35,13 +27,7 @@ public class ProjectileEnemy : Enemy, ICanAttack
 
     private void InitBullet()
     {
-        //GameObject bullet = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
-        //var projectile = bullet.GetComponent<Projectile>();
-        //projectile.Init(_playerHealth, _damage, Target);
-        //projectile.Launch();
-
-        var bullet = _pool.GetObject();
-        bullet.transform.parent = null;
+        GameObject bullet = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
         var projectile = bullet.GetComponent<Projectile>();
         projectile.Init(_playerHealth, _damage, Target);
         projectile.Launch();

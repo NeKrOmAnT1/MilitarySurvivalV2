@@ -3,8 +3,6 @@ using Zenject;
 
 public class Projectile : MonoBehaviour
 {
-    public class Pool : MonoMemoryPool<Projectile> { }
-
     [SerializeField] private GameObject _targetPrefab;
     [SerializeField] private GameObject _targetDamagePrefab;
     [Space]
@@ -21,7 +19,7 @@ public class Projectile : MonoBehaviour
     private PlayerHealth _playerHealth;
     private float _damage;
     private Vector3 _attackPos;
-    
+
     public void Init(PlayerHealth playerHealth, float damage, Transform target)
     {
         _target = target;
@@ -41,7 +39,6 @@ public class Projectile : MonoBehaviour
         _rigidbody.velocity = CalculateLaunchData().initialVelocity;
     }
 
-
     private LaunchData CalculateLaunchData()
     {
         float displacementY = _target.position.y - _rigidbody.position.y;
@@ -59,7 +56,8 @@ public class Projectile : MonoBehaviour
         _exp.DeleteSphere();
         _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
 
-        Destroy(this);
+        //this.gameObject.SetActive(false);//temporary
+        Destroy(this.gameObject);
         //Invoke("DeleteBullet", _timeToDelete);
     }
 
@@ -85,5 +83,6 @@ public class Projectile : MonoBehaviour
             this.initialVelocity = initialVelocity;
             this.timeToTarget = timeToTarget;
         }
+
     }
 }
