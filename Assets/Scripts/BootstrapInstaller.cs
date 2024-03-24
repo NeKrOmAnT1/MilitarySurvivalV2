@@ -3,7 +3,6 @@ using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
-  
     [SerializeField] private WeaponSO[] _weaponSO;
 
     public override void InstallBindings()
@@ -19,7 +18,7 @@ public class BootstrapInstaller : MonoInstaller
     {
         foreach (var weapon in _weaponSO)
         {
-            Container.Bind<WeaponCharacteristics>().FromNew().AsTransient().WithArguments(weapon).NonLazy();
+            Container.Bind<WeaponCharacteristics>().FromNew().AsCached().WithArguments(weapon);
         }
     }
 }

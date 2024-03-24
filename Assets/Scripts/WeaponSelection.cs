@@ -23,6 +23,6 @@ public class WeaponSelection
         //Debug.Log("CurrentWeapon " + CurrentWeaponCharacteristics.BulletSpeed.Value);
     }
 
-    public void AddDic(string name, WeaponCharacteristics weaponCharacteristics) =>
+    public void AddDic(string name, WeaponCharacteristics weaponCharacteristics) => 
         _weaponCharDic.Add(name, weaponCharacteristics);
 }
