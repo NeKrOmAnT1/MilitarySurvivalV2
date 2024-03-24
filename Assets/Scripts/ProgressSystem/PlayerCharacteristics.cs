@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 public class PlayerCharacteristics : BaseCharacteristics
 {
@@ -16,12 +15,6 @@ public class PlayerCharacteristics : BaseCharacteristics
         Armour = new(playerStats.Armour);
         MoveSpeed = new(playerStats.MoveSpeed);
         Luck = new(playerStats.Luck);
-
-        Debug.Log("Construct PlayerCharacteristics");
-        //Debug.Log(Hp.Value);
-        //Debug.Log(Armour.Value);
-        //Debug.Log(MoveSpeed.Value);
-        //Debug.Log(Luck.Value);
     }
 
     public override void DebuffAll()
@@ -37,13 +30,6 @@ public class PlayerCharacteristics : BaseCharacteristics
         StatModifier modifier = new(value, typeModifier);
         param.AddModifier(modifier);
         ChangeHPE?.Invoke();
-
-        //Debug.Log("Change PlayerCharacteristics");
-        //Debug.Log(Hp.Value);
-        //Debug.Log(Armour.Value);
-        //Debug.Log(MoveSpeed.Value);
-        //Debug.Log(Luck.Value);
-
         return modifier;
     }
 }

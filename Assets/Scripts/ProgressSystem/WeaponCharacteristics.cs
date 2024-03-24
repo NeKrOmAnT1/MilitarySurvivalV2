@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class WeaponCharacteristics : BaseCharacteristics
 {
     public string Name { get; private set; }
@@ -26,8 +24,6 @@ public class WeaponCharacteristics : BaseCharacteristics
         SpreadAngle = new(weaponStats.SpreadAngle);
         BulletsNumber = new(weaponStats.BulletsNumber);
         DamageArea = new(weaponStats.DamageArea);
-
-        Debug.Log("Construct   " + Name);
     }
 
     public override void DebuffAll()
@@ -45,12 +41,6 @@ public class WeaponCharacteristics : BaseCharacteristics
     {
         StatModifier modifier = new(value, typeModifier);
         param.AddModifier(modifier);
-
-        //Debug.Log("Buff WeaponCharacteristics");
-        //Debug.Log(Name);
-        //Debug.Log(BulletSpeed.Value);
-        //Debug.Log(CoolDown.Value);
-        //Debug.Log(DamageDealt.Value);
         return modifier;
     }
 }

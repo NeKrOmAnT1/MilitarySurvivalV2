@@ -43,9 +43,6 @@ public class PlayerHealth
         OnHealthChangedE?.Invoke(_currentHealth, _player.PlayerCharacteristics.Hp.Value);//for UI
     }
 
-    private void ChangeMaxHP()
-    {
+    private void ChangeMaxHP() => 
         OnHealthChangedE?.Invoke(_currentHealth, _player.PlayerCharacteristics.Hp.Value);
-        Debug.Log("OnHealthChangedE " + _player.PlayerCharacteristics.Hp.Value);
-    }
 }

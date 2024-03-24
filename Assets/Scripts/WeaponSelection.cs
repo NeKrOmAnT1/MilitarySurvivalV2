@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class WeaponSelection
 {
@@ -16,11 +15,6 @@ public class WeaponSelection
         CurrentWeaponName = currentWeaponName;
         CurrentWeaponCharacteristics = _weaponCharDic[CurrentWeaponName];
         CangeWeapon?.Invoke(CurrentWeaponCharacteristics);
-
-        Debug.Log("CurrentWeapon " + CurrentWeaponCharacteristics.Name);
-        //Debug.Log("CurrentWeapon " + CurrentWeaponCharacteristics.DamageDealt.Value);
-        //Debug.Log("CurrentWeapon " + CurrentWeaponCharacteristics.CoolDown.Value);
-        //Debug.Log("CurrentWeapon " + CurrentWeaponCharacteristics.BulletSpeed.Value);
     }
 
     public void AddDic(string name, WeaponCharacteristics weaponCharacteristics) => 
