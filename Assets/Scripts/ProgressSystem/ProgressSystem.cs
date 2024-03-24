@@ -1,28 +1,46 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine;
 
 public class ProgressSystem
 {
-    //private readonly XpSystem _xpSystem; //will probably be needed
+    private readonly XpSystem _xpSystem; //will probably be needed
     //private readonly MoneySystem _moneySystem;
     private readonly PlayerCharacteristics _playerCharacteristics;
-    private readonly WeaponCharacteristics _weaponCharacteristics;
+    private  WeaponCharacteristics _weaponCharacteristics;
     private readonly ICoroutineRunner _coroutine;
+    //private readonly HUD _hud;
+    private readonly WeaponSelection _weaponSelection;
 
-    public ProgressSystem(XpSystem xpSystem, MoneySystem moneySystem,
-        PlayerCharacteristics playerCharacteristics, WeaponCharacteristics weaponCharacteristics,
-        ICoroutineRunner coroutine)
+    public event Action EnableUpgradeMenuE;
+    public event Action DisableUpgradeMenuE;
+
+    public ProgressSystem(XpSystem xpSystem,/*, MoneySystem moneySystem,*/
+        PlayerCharacteristics playerCharacteristics/*, WeaponCharacteristics weaponCharacteristics*/,
+        ICoroutineRunner coroutine/*, HUD hud*/, WeaponSelection weaponSelection)
     {
-        //_xpSystem = xpSystem;
+        _xpSystem = xpSystem;
         //_moneySystem = moneySystem;
         _playerCharacteristics = playerCharacteristics;
-        _weaponCharacteristics = weaponCharacteristics;
         _coroutine = coroutine;
+        //_hud = hud;
+        _weaponSelection = weaponSelection;
+        _weaponCharacteristics = _weaponSelection.CurrentWeaponCharacteristics;
 
-        Debug.Log(xpSystem);
-        Debug.Log(moneySystem);
-        Debug.Log(playerCharacteristics);
-        Debug.Log(weaponCharacteristics);
-        Debug.Log(coroutine);
+        _xpSystem.XpIsFull += EnterUpgradeMenu;
+        weaponSelection.CangeWeapon += CangeWeapon;
+    }
+
+    private void CangeWeapon(WeaponCharacteristics weaponCharacteristics)
+    {
+        _weaponCharacteristics = weaponCharacteristics;
+    }
+
+    private void EnterUpgradeMenu()
+    {
+        Time.timeScale = 0;
+        //_hud.EnableUpgradeMenu();
+        EnableUpgradeMenuE?.Invoke();
     }
 
     public void AcceptGrade(GradeSO grade)
@@ -44,6 +62,9 @@ public class ProgressSystem
         AcceptSkill(_playerCharacteristics, grade.PassiveIsTEmporary_2,
             DefinePassiveSkill(grade.PassiveSkill_2), grade.PassiveValue_2, grade.PassiveModifier_2,
             grade.PassiveLifetime_2);
+
+        Time.timeScale = 1;
+        DisableUpgradeMenuE?.Invoke();
     }
 
     private void AcceptSkill(BaseCharacteristics characteristics, bool isTEmporary, Stat skill,

@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using Zenject;
 
-public class GamePlayInstaller : MonoInstaller
+public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
 {
     [SerializeField] private HUD _hudPrefab;
     [SerializeField] private Bullet _bulletPrefab;
@@ -16,22 +17,30 @@ public class GamePlayInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        this.gameObject.SetActive(true);
+        Container.Bind<ICoroutineRunner>().FromInstance(this);
+        
         InstallFactories();
 
         InstallPlayerCharacteristics();
-        
+
         InstallCamera();
 
         InstallPlayer();
 
-        InstallHud();
-
-
         InstallEnemySpawnManager();
 
-        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+        InstallXpSystem();
+        InstallProgressSystem();
+
+        InstallHud();
     }
 
+    private void InstallProgressSystem() => 
+        Container.Bind<ProgressSystem>().FromNew().AsSingle().NonLazy();
+
+    private void InstallXpSystem() => 
+        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
 
     private void InstallEnemySpawnManager()
     {

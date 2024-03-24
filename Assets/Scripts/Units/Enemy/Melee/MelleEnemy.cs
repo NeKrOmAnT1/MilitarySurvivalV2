@@ -21,7 +21,6 @@ public class MelleEnemy : Enemy, ICanAttack
         _timer -= Time.deltaTime;
         if (_timer < 0f && _isAttack == false)
         {
-            Debug.Log("AttackProcess");
             _isAttack = true;
             StartAttack();
             _timer = _attackDelay;

@@ -35,9 +35,10 @@ public class SquadScript : MonoBehaviour
 
     private void Update()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame)
+        if(Mouse.current.leftButton.wasPressedThisFrame && Time.timeScale != 0)
         {
             AddAlly();
+            Debug.Log("AddAlly");
         }       
     }
 
