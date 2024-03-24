@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class HUD : MonoBehaviour
@@ -29,14 +30,21 @@ public class HUD : MonoBehaviour
         _xpSystem.ChangeXPE += UpdateXPValue;
         ProgressSystem.EnableUpgradeMenuE += EnableUpgradeMenu;
         ProgressSystem.DisableUpgradeMenuE += DisableUpgradeMenu;
+
+        Debug.Log(_xpSystem.CurrentXp);
+        UpdateXPValue();
     }
 
 
     private void UpdateHPValue(float current, float max) =>
         _hpBarUI.SetBarAmount(current / max);
 
-    public void UpdateXPValue(int current, int max) =>
-        _xpBarUI.SetBarAmount(current / max);
+    public void UpdateXPValue()
+    {
+        _xpBarUI.SetBarAmount(_xpSystem.CurrentXp / _xpSystem.TargetXp);
+        Debug.Log(_xpSystem.CurrentXp);
+        Debug.Log(_xpSystem.TargetXp);
+    }
 
     public void EnableUpgradeMenu() => 
         _upgradeMenuObj.SetActive(true);

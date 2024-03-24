@@ -1,20 +1,24 @@
 ﻿using System;
+using UnityEngine;
 
 public class XpSystem 
 {
-    private readonly int _targetXp = 10; //where to get it from?
+    private int _targetXp = 100; //where to get it from?
 
     public int CurrentXp { get; private set; }
+    public int TargetXp { get => _targetXp; }
 
     public event Action XpIsFull;
-    public event Action<int, int> ChangeXPE;
+    public event Action ChangeXPE;
 
 
     public XpSystem(EnemySpawnManager enemySpawnManager)
     {
         enemySpawnManager.OnSpawned += AddEnemy;
         
-        ChangeXPE?.Invoke(CurrentXp, _targetXp);
+        ChangeXPE?.Invoke();
+        Debug.Log(CurrentXp);
+        Debug.Log(_targetXp);
     }
 
     private void AddEnemy(EnemyDeath enemy) =>
@@ -30,6 +34,13 @@ public class XpSystem
             XpIsFull?.Invoke();
         }
 
-        ChangeXPE?.Invoke(CurrentXp, _targetXp);
+        ChangeXPE?.Invoke();
+    }
+
+    public void Reset()
+    {
+        CurrentXp = 0;
+        ChangeXPE?.Invoke();
+        _targetXp += 10; //trmoirary
     }
 }

@@ -160,7 +160,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.418
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1162,6 +1162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1767134740207053024}
+  - component: {fileID: 1477910393706412438}
   m_Layer: 5
   m_Name: XP Bar
   m_TagString: Untagged
@@ -1190,6 +1191,19 @@ RectTransform:
   m_AnchoredPosition: {x: -267, y: 75}
   m_SizeDelta: {x: 462.46045, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1477910393706412438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435972969106085107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af967bd027efc404ca5fd3be4c2140fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _barImage: {fileID: 5923404860221967976}
 --- !u!1 &3527942062135726580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,7 +2547,6 @@ GameObject:
   - component: {fileID: 1119723504967086040}
   - component: {fileID: 8924572877765335038}
   - component: {fileID: 95651243098220048}
-  - component: {fileID: 9149801325126381135}
   - component: {fileID: 4816310607962004378}
   m_Layer: 5
   m_Name: HUD
@@ -2671,22 +2684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpBarUI: {fileID: 1119723504967086040}
-  _xpBarUI: {fileID: 9149801325126381135}
+  _xpBarUI: {fileID: 1477910393706412438}
   _upgradeMenuObj: {fileID: 6565563767059570985}
   _upgradeMenu: {fileID: 4816310607962004378}
---- !u!114 &9149801325126381135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7631919498807523577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af967bd027efc404ca5fd3be4c2140fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _barImage: {fileID: 5923404860221967976}
 --- !u!114 &4816310607962004378
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -58,6 +58,7 @@ public class ProgressSystem
 
         Time.timeScale = 1;
         DisableUpgradeMenuE?.Invoke();
+        _xpSystem.Reset();
     }
 
     private void AcceptSkill(BaseCharacteristics characteristics, bool isTEmporary, Stat skill,
