@@ -27,13 +27,23 @@ public class ProgressSystem
         weaponSelection.CangeWeapon += CangeWeapon;
     }
 
-    private void CangeWeapon(WeaponCharacteristics weaponCharacteristics) => 
+    private void CangeWeapon(WeaponCharacteristics weaponCharacteristics) =>
         _weaponCharacteristics = weaponCharacteristics;
 
     private void EnterUpgradeMenu()
     {
         Time.timeScale = 0;
         EnableUpgradeMenuE?.Invoke();
+    }
+
+    public void SkillUp(BaseCharacteristics characteristics, bool isTEmporary, Stat skill,
+        float value, TypeModifier modifier, float lifetime, float price)
+    {
+        if (price <= _moneySystem.Money)
+        {
+            AcceptSkill(characteristics, isTEmporary, skill, value, modifier, lifetime);
+            _moneySystem.SpendMoney(price);
+        }
     }
 
     public void AcceptGrade(GradeSO grade)

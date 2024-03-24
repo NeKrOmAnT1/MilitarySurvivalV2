@@ -28,7 +28,7 @@ public class UpgradeMenu : MonoBehaviour
         _moneySystem.MoneyChange += MoneyChange;
     }
 
-    private void MoneyChange(int value) => 
+    private void MoneyChange(float value) => 
         _moneyText.text = value.ToString();
 
 

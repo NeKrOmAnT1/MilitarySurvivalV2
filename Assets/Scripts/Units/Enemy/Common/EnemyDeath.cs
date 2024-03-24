@@ -7,7 +7,7 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] private GameObject _deathFXPrefab;
 
     public event Action<int> OnDeadXP; 
-    public event Action<int> OnDeadMonty;
+    public event Action<float> OnDeadMonty;
     public bool IsDead { get; private set; } //to block movement and attacks in other classes.
                                              
     public void Death()
