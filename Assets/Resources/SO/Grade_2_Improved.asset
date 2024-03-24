@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Grade_2_Improved
   m_EditorClassIdentifier: 
   _name: Improved
-  ActiveSkill_1: 13
+  ActiveSkill_1: 11
   ActiveValue_1: 20
   ActiveModifier_1: 200
   ActiveIsTEmporary_1: 0

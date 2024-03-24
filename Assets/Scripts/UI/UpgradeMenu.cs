@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,13 +8,8 @@ public class UpgradeMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown _dropdown;
     [SerializeField] private HUD _hud;
 
-    private Dictionary<string, GradeSO> _gradesDic = new();
+    private readonly Dictionary<string, GradeSO> _gradesDic = new();
     private ProgressSystem _progressSystem;
-
-    private void OnEnable()
-    {
-        Debug.Log(_dropdown.interactable);
-    }
 
     private void Start()
     {

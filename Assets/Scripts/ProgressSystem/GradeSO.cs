@@ -46,8 +46,7 @@ public enum PassiveSkill
 
 public enum ActiveSkill
 {
-
-    AttackSpeed = 11,
+    BulletSpeed = 11,
     CoolDown = 12,
     DamageDealt = 13,
     Distance = 14,

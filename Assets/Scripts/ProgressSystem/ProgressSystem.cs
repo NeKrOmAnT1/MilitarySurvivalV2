@@ -1,29 +1,25 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 
 public class ProgressSystem
 {
-    private readonly XpSystem _xpSystem; //will probably be needed
+    private readonly XpSystem _xpSystem;
     //private readonly MoneySystem _moneySystem;
     private readonly PlayerCharacteristics _playerCharacteristics;
-    private  WeaponCharacteristics _weaponCharacteristics;
+    private WeaponCharacteristics _weaponCharacteristics;
     private readonly ICoroutineRunner _coroutine;
-    //private readonly HUD _hud;
     private readonly WeaponSelection _weaponSelection;
 
     public event Action EnableUpgradeMenuE;
     public event Action DisableUpgradeMenuE;
 
     public ProgressSystem(XpSystem xpSystem,/*, MoneySystem moneySystem,*/
-        PlayerCharacteristics playerCharacteristics/*, WeaponCharacteristics weaponCharacteristics*/,
-        ICoroutineRunner coroutine/*, HUD hud*/, WeaponSelection weaponSelection)
+        PlayerCharacteristics playerCharacteristics, ICoroutineRunner coroutine, WeaponSelection weaponSelection)
     {
         _xpSystem = xpSystem;
         //_moneySystem = moneySystem;
         _playerCharacteristics = playerCharacteristics;
         _coroutine = coroutine;
-        //_hud = hud;
         _weaponSelection = weaponSelection;
         _weaponCharacteristics = _weaponSelection.CurrentWeaponCharacteristics;
 
@@ -31,15 +27,12 @@ public class ProgressSystem
         weaponSelection.CangeWeapon += CangeWeapon;
     }
 
-    private void CangeWeapon(WeaponCharacteristics weaponCharacteristics)
-    {
+    private void CangeWeapon(WeaponCharacteristics weaponCharacteristics) => 
         _weaponCharacteristics = weaponCharacteristics;
-    }
 
     private void EnterUpgradeMenu()
     {
         Time.timeScale = 0;
-        //_hud.EnableUpgradeMenu();
         EnableUpgradeMenuE?.Invoke();
     }
 
@@ -82,7 +75,7 @@ public class ProgressSystem
 
         switch (activeSkill)
         {
-            case ActiveSkill.AttackSpeed:
+            case ActiveSkill.BulletSpeed:
                 skill = _weaponCharacteristics.BulletSpeed;
                 break;
             case ActiveSkill.CoolDown:
