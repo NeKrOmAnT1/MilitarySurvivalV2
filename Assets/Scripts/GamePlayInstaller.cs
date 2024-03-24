@@ -31,10 +31,14 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         InstallEnemySpawnManager();
 
         InstallXpSystem();
+        InstallMoneySystem();
         InstallProgressSystem();
 
         InstallHud();
     }
+
+    private void InstallMoneySystem() => 
+        Container.Bind<MoneySystem>().FromNew().AsSingle().NonLazy();
 
     private void InstallProgressSystem() => 
         Container.Bind<ProgressSystem>().FromNew().AsSingle().NonLazy();

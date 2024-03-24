@@ -9,6 +9,7 @@ public class XpSystem
     public event Action XpIsFull;
     public event Action<int, int> ChangeXPE;
 
+
     public XpSystem(EnemySpawnManager enemySpawnManager)
     {
         enemySpawnManager.OnSpawned += AddEnemy;
@@ -17,7 +18,7 @@ public class XpSystem
     }
 
     private void AddEnemy(EnemyDeath enemy) =>
-        enemy.OnDead += AddXP;
+        enemy.OnDeadXP += AddXP;
 
     private void AddXP(int xpforKilling)
     {

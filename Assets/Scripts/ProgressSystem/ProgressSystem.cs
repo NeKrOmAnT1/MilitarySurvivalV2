@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProgressSystem
 {
     private readonly XpSystem _xpSystem;
-    //private readonly MoneySystem _moneySystem;
+    private readonly MoneySystem _moneySystem;
     private readonly PlayerCharacteristics _playerCharacteristics;
     private WeaponCharacteristics _weaponCharacteristics;
     private readonly ICoroutineRunner _coroutine;
@@ -13,11 +13,11 @@ public class ProgressSystem
     public event Action EnableUpgradeMenuE;
     public event Action DisableUpgradeMenuE;
 
-    public ProgressSystem(XpSystem xpSystem,/*, MoneySystem moneySystem,*/
+    public ProgressSystem(XpSystem xpSystem, MoneySystem moneySystem,
         PlayerCharacteristics playerCharacteristics, ICoroutineRunner coroutine, WeaponSelection weaponSelection)
     {
         _xpSystem = xpSystem;
-        //_moneySystem = moneySystem;
+        _moneySystem = moneySystem;
         _playerCharacteristics = playerCharacteristics;
         _coroutine = coroutine;
         _weaponSelection = weaponSelection;
