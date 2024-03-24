@@ -54,4 +54,3 @@ public enum ActiveSkill
     BulletsNumber = 16,
     DamageArea = 17,
 }
-
