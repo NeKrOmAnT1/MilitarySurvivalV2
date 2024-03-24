@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "DefaultWeaponSO", menuName = "_weaponSO")]
+[CreateAssetMenu(fileName = "DefaultWeaponSO", menuName = "WeaponSO")]
 public class WeaponSO : ScriptableObject
 {
     [field: SerializeField]
