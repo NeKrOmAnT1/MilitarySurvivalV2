@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
         _playerHealth = playerHealth;
         _damage = damage;
         //_factory = factory;
-        _rigidbody.useGravity = false;
+        //_rigidbody.useGravity = false;
         transform.rotation = rot;
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
@@ -50,16 +50,15 @@ public class Projectile : MonoBehaviour
 
     public void Launch()
     {
-        this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
-        Physics.gravity = Vector3.up * _gravity;
         _rigidbody.useGravity = true;
+        Physics.gravity = Vector3.up * _gravity;    
         _rigidbody.velocity = CalculateLaunchData().initialVelocity;
     }
 
     private LaunchData CalculateLaunchData()
     {
-        float displacementY = _target.position.y - _rigidbody.position.y;
-        Vector3 displacementXZ = new(_target.position.x - _rigidbody.position.x, 0, _target.position.z - _rigidbody.position.z);
+        float displacementY = _attackPos.y - transform.position.y;         //_target.position.y - transform.position.y; //_rigidbody.position.y;
+        Vector3 displacementXZ = new(_attackPos.x - _rigidbody.position.x, 0, _attackPos.z - _rigidbody.position.z);
         float time = Mathf.Sqrt(-2 * _h / _gravity) + Mathf.Sqrt(2 * (displacementY - _h) / _gravity);
         Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity * _h);
         Vector3 velocityXZ = displacementXZ / time;

@@ -72,7 +72,7 @@ MonoBehaviour:
   - melee1EnemyAmount: 0
     ram1EnemyAmount: 0
     spit1EnemyAmount: 0
-    projectile1EnemyAmount: 1
+    projectile1EnemyAmount: 15
     spawnTime: 0
   startPoolSize: 10
 --- !u!1 &4062401766149362235
