@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a8d35dc1f3cca4980338271db1d5b4, type: 3}
   m_Name: DamageUpCardSO
   m_EditorClassIdentifier: 
-  _name: 
+  Name: 
   ActiveSkill: 13
   Value: 15
   Modifier: 200
   IsTEmporary: 1
   Lifetime: 100
+  Sprite: {fileID: 21300064, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}

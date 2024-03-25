@@ -24,10 +24,10 @@ public class ProgressSystem
         _weaponCharacteristics = _weaponSelection.CurrentWeaponCharacteristics;
 
         _xpSystem.XpIsFull += EnterUpgradeMenu;
-        weaponSelection.CangeWeapon += CangeWeapon;
+        weaponSelection.CangeWeapon += ChangeWeapon;
     }
 
-    private void CangeWeapon(WeaponCharacteristics weaponCharacteristics) =>
+    private void ChangeWeapon(WeaponCharacteristics weaponCharacteristics) =>
         _weaponCharacteristics = weaponCharacteristics;
 
     private void EnterUpgradeMenu()

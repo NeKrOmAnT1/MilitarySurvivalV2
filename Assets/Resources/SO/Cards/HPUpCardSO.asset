@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bab40567cefca4b969d78c7175c748, type: 3}
   m_Name: HPUpCardSO
   m_EditorClassIdentifier: 
+  Name: 
   PassiveSkill: 1
   Value: 15
   PassiveModifier: 200
   IsTEmporary: 0
   Lifetime: 0
+  Sprite: {fileID: 21300074, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}

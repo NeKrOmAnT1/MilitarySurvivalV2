@@ -13,10 +13,13 @@ public class HUD : MonoBehaviour
 
     public ProgressSystem ProgressSystem { get; private set; }
     public MoneySystem MoneySystem { get; private set; }
+    public ActiveSkillUpCardSO[] ActiveSkillUpCards { get; private set; }
+    public PassiveSkillUpCardSO[] PassiveSkillUpCards { get; private set; }
 
 
     [Inject]
-    private void Construct(Player player, ProgressSystem progressSystem, XpSystem xpSystem, MoneySystem moneySystem)
+    private void Construct(Player player, ProgressSystem progressSystem, XpSystem xpSystem, MoneySystem moneySystem,
+        ActiveSkillUpCardSO[] activeSkillUpCards, PassiveSkillUpCardSO passiveSkillUpCards)
     {
         _player = player;
         ProgressSystem = progressSystem;
@@ -36,11 +39,14 @@ public class HUD : MonoBehaviour
     private void UpdateHPValue(float current, float max) =>
         _hpBarUI.SetBarAmount(current / max);
 
-    public void UpdateXPValue() => 
+    public void UpdateXPValue() =>
         _xpBarUI.SetBarAmount(_xpSystem.CurrentXp / _xpSystem.TargetXp);
 
-    public void EnableUpgradeMenu() => 
+    public void EnableUpgradeMenu()
+    {
         _upgradeMenuObj.SetActive(true);
+        _upgradeMenu.Enable();
+    }
 
     private void DisableUpgradeMenu() =>
         _upgradeMenuObj.SetActive(false);
