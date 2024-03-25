@@ -1,8 +1,11 @@
 using UnityEngine;
-using Zenject;
+using UnityEngine.Pool;
+
 
 public class Projectile : MonoBehaviour
 {
+    //public class Pool : MonoMemoryPool<Projectile> { }
+
     [SerializeField] private GameObject _targetPrefab;
     [SerializeField] private GameObject _targetDamagePrefab;
     [Space]
@@ -19,30 +22,43 @@ public class Projectile : MonoBehaviour
     private PlayerHealth _playerHealth;
     private float _damage;
     private Vector3 _attackPos;
+    private Vector3 _enemyPos;
+    internal ObjectPool<Projectile> ProjectilePool;
 
-    public void Init(PlayerHealth playerHealth, float damage, Transform target)
-    {
+
+    //public void Init(PlayerHealth playerHealth, float damage, Transform target);
+
+    //private ProjectileFactory _factory;
+
+    public void Init(Quaternion rot, PlayerHealth playerHealth, float damage, Transform target, Vector3 enemyPos)//, ProjectileFactory factory)
+    {     
+        _enemyPos = enemyPos;
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
-
-        _rigidbody.useGravity = false;
-
+        //_factory = factory;
+        //_rigidbody.useGravity = false;
+        transform.rotation = rot;
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
 
+    private void Start()
+    {
+        //this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
+    }
+
     public void Launch()
     {
-        Physics.gravity = Vector3.up * _gravity;
         _rigidbody.useGravity = true;
+        Physics.gravity = Vector3.up * _gravity;    
         _rigidbody.velocity = CalculateLaunchData().initialVelocity;
     }
 
     private LaunchData CalculateLaunchData()
     {
-        float displacementY = _target.position.y - _rigidbody.position.y;
-        Vector3 displacementXZ = new(_target.position.x - _rigidbody.position.x, 0, _target.position.z - _rigidbody.position.z);
+        float displacementY = _attackPos.y - transform.position.y;         //_target.position.y - transform.position.y; //_rigidbody.position.y;
+        Vector3 displacementXZ = new(_attackPos.x - _rigidbody.position.x, 0, _attackPos.z - _rigidbody.position.z);
         float time = Mathf.Sqrt(-2 * _h / _gravity) + Mathf.Sqrt(2 * (displacementY - _h) / _gravity);
         Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity * _h);
         Vector3 velocityXZ = displacementXZ / time;
@@ -55,10 +71,14 @@ public class Projectile : MonoBehaviour
         Damage();
         _exp.DeleteSphere();
         _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
+      
+        this.gameObject.SetActive(false);
+        this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
 
         //this.gameObject.SetActive(false);//temporary
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
         //Invoke("DeleteBullet", _timeToDelete);
+        //_factory.RemoveProjectile(this);
     }
 
     private void Damage()

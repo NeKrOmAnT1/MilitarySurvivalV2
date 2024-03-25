@@ -11,6 +11,11 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
     [SerializeField] private EnemySpawnManager _enemySpawnPrefab;
     [SerializeField] private PlayerSO _playerSO;
     [SerializeField] private Transform _playerSpawnPoint;
+    //[SerializeField] private Projectile _projectilePrefab;
+
+    [SerializeField] private AmmoPool _ammoPool;
+    //[SerializeField] private Projectile _projectilePrefab;
+
 
 
     private CameraFollow _camera;
@@ -21,6 +26,7 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         Container.Bind<ICoroutineRunner>().FromInstance(this);
         
         InstallFactories();
+        InstallBulletFactory();
 
         InstallPlayerCharacteristics();
 
@@ -45,7 +51,30 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
 
     private void InstallXpSystem() => 
         Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+        InstallHud();
 
+        InstallAmmoPool();
+
+        //InstallProjectileFactory();
+        InstallEnemySpawnManager();
+
+        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+
+        
+
+    }
+
+    //private void InstallProjectileFactory()
+    //{
+    //    Container.Bind<ProjectileFactory>().AsSingle();
+    //    Container.BindMemoryPool<Projectile, Projectile.Pool>().FromComponentInNewPrefab(_projectilePrefab);
+    //}
+
+    private void InstallAmmoPool()
+    {
+        var pool = Container.InstantiatePrefabForComponent<AmmoPool>(_ammoPool);
+        Container.Bind<AmmoPool>().FromInstance(pool).AsSingle().NonLazy();
+    }
     private void InstallEnemySpawnManager()
     {
         var spawner = Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);
@@ -73,7 +102,7 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         _camera.Follow(player.transform);
     }
 
-    private void InstallFactories()
+    private void InstallBulletFactory()
     {
         Container.Bind<BulletFactory>().AsSingle();
         Container.BindMemoryPool<Bullet, Bullet.Pool>().FromComponentInNewPrefab(_bulletPrefab);

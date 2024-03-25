@@ -14,23 +14,32 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private StepSpawnConfig[] stepSpawnConfigs;
 
     private Player _player;
-
+    private AmmoPool _ammoPool;
     private Transform target;
     private PlayerHealth playerHealth;
+    ///private ProjectileFactory _projectileFactory;
 
     private Dictionary<string, EnemyPool<Transform>> enemyPools;
     private int currentStep = 0;
-    public int startPoolSize = 10;
+    public int startPoolSize = 10; 
 
     [Inject]
-    private void Construct(Player player)
+    private void Construct(Player player, AmmoPool ammoPool)//, ProjectileFactory projectileFactory)
     {
         _player = player;
         target = _player.transform;
         playerHealth = _player.PlayerHealth;
+        _ammoPool = ammoPool;
+
+        //_projectileFactory = projectileFactory;
     }
 
     private void Start()
+    {
+        InitEnemyPool();      
+        StartNextSpawnStep();
+    }
+    private void InitEnemyPool()
     {
         enemyPools = new Dictionary<string, EnemyPool<Transform>>();
         for (int i = 0; i < enemyPrefabs.Length; i++)
@@ -40,10 +49,8 @@ public class EnemySpawnManager : MonoBehaviour
                                                                       startPoolSize,
                                                                       enemyContainer.transform));
         }
-
-
-        StartNextSpawnStep();
     }
+
 
     private void StartNextSpawnStep()
     {
@@ -97,6 +104,14 @@ public class EnemySpawnManager : MonoBehaviour
         enemy.position = randomSpawnPoint.position;
         var Enemy = enemy.GetComponent<Enemy>();
         Enemy.Init(playerHealth, target);
+        /////////////////////////////////////////////////////////////
+        //if (Enemy.TryGetComponent<ProjectileEnemy>(out var projEnemy))
+        //    projEnemy.AddFActory(_projectileFactory);
+        /////////////////////////////////////////////////////////////
+        ///
+        if(Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy))
+            projectileEnemy.SetAmmoPool(_ammoPool);
+
 
         OnSpawned?.Invoke(Enemy.GetComponent<EnemyDeath>());
     }

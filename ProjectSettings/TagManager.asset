@@ -9,6 +9,9 @@ TagManager:
   - Spit1
   - Ram1
   - FxTemporaire
+  - 1111
+  - asteroid
+  - ship
   layers:
   - Default
   - TransparentFX

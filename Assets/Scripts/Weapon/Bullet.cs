@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
 
     private void Despawn()
     {
-        _factory.RemoveProjectile(this);
+        _factory.RemoveBullet(this);
         _isActive = false;
     }
 }

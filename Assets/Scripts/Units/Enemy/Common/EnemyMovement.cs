@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
                 attack.AttackProcess();
             }
             catch
-            {
+            {         
                 return;
             }
         }
