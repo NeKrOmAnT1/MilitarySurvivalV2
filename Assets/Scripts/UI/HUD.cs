@@ -45,7 +45,7 @@ public class HUD : MonoBehaviour
     public void EnableUpgradeMenu()
     {
         _upgradeMenuObj.SetActive(true);
-        _upgradeMenu.Enable();
+        //_upgradeMenu.Enable();
     }
 
     private void DisableUpgradeMenu() =>
