@@ -7,6 +7,8 @@ public class ProjectileEnemy : Enemy, ICanAttack
 {
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private int _bulletsPoolSize = 20;
+
 
     [SerializeField] private int _bulletsPoolSize = 20;
     [SerializeField] private ProjectileOwner _owner => ProjectileOwner.ProjectileEnemy;
@@ -85,4 +87,8 @@ public class ProjectileEnemy : Enemy, ICanAttack
 
 
     }
+
+
+    //public void AddFActory(ProjectileFactory projectileFactory) =>
+    //    _projectileFactory = projectileFactory;
 }

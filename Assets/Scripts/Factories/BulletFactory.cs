@@ -8,7 +8,7 @@ public class BulletFactory
 
     [Inject] private readonly Bullet.Pool _bulletsPool;
 
-    public Bullet SpawnProjectile(Transform transform, SideType side, WeaponCharacteristics weapon, Vector3 direction)
+    public Bullet SpawnBullet(Transform transform, SideType side, WeaponCharacteristics weapon, Vector3 direction)
     {
         var bullet = _bulletsPool.Spawn();
         _bullet.Add(bullet);
@@ -17,7 +17,7 @@ public class BulletFactory
         return bullet;
     }
 
-    public void RemoveProjectile(Bullet bullet)
+    public void RemoveBullet(Bullet bullet)
     {
         _bulletsPool.Despawn(bullet);
         _bullet.Remove(bullet);

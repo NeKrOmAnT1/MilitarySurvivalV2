@@ -4,6 +4,8 @@ using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
+    //public class Pool : MonoMemoryPool<Projectile> { }
+
     [SerializeField] private GameObject _targetPrefab;
     [SerializeField] private GameObject _targetDamagePrefab;
     [Space]
@@ -35,9 +37,9 @@ public class Projectile : MonoBehaviour
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
-
+        //_factory = factory;
         _rigidbody.useGravity = false;
-
+        transform.rotation = rot;
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
@@ -71,11 +73,9 @@ public class Projectile : MonoBehaviour
         this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
 
         //this.gameObject.SetActive(false);//temporary
-        Destroy(this.gameObject);
-
-        //temporary
         // Destroy(this.gameObject);
         //Invoke("DeleteBullet", _timeToDelete);
+        //_factory.RemoveProjectile(this);
     }
 
     private void Damage()

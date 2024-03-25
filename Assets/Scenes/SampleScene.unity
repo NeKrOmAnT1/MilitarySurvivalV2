@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1198571083157770870, guid: 01252a209745da3479ad9ffb1ccc998f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1996994935236016952, guid: 01252a209745da3479ad9ffb1ccc998f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -507,7 +507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1716109777
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -733,6 +733,7 @@ MonoBehaviour:
   _enemySpawnPrefab: {fileID: 6655857326069907471, guid: 04d4b8e267020a348891cc0bc901886e, type: 3}
   _playerSO: {fileID: 11400000, guid: 3a222931448c4a84f8d00409a2067e53, type: 2}
   _playerSpawnPoint: {fileID: 7991162894902292354}
+  _projectilePrefab: {fileID: 8598036695169180062, guid: b62a243981d4f8345a02f8a743907435, type: 3}
 --- !u!1001 &7991162894902292353
 PrefabInstance:
   m_ObjectHideFlags: 0

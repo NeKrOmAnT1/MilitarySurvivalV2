@@ -49,14 +49,14 @@ public class PlayerAttack : MonoBehaviour
 
                         Vector3 shootDirection = rot * Vector3.forward;
 
-                        _bulletFactory.SpawnProjectile(_bulletspawnPoint, _side, _player.WeaponCharacteristics, shootDirection);
+                        _bulletFactory.SpawnBullet(_bulletspawnPoint, _side, _player.WeaponCharacteristics, shootDirection);
                     }
                 }
                 else
                 {
                     float playerRotationY = _player.transform.rotation.eulerAngles.y;
                     Vector3 shootDirection = Quaternion.Euler(0, playerRotationY, 0) * Vector3.forward;
-                    _bulletFactory.SpawnProjectile(_bulletspawnPoint, _side, _player.WeaponCharacteristics, shootDirection);
+                    _bulletFactory.SpawnBullet(_bulletspawnPoint, _side, _player.WeaponCharacteristics, shootDirection);
                 }
                 break;
             case WeaponType.Melee:
