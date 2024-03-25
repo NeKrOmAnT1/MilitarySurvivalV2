@@ -22,6 +22,15 @@ public class EnemySpawnManager : MonoBehaviour
     private int currentStep = 0;
     public int startPoolSize = 10;
 
+
+
+    //private EnemyPool<Projectile> _pool;
+    //[SerializeField] private GameObject _projectilePrefab;
+    //[SerializeField] private int _bulletsPoolSize = 20;
+
+
+    
+
     [Inject]
     private void Construct(Player player)
     {
@@ -30,7 +39,28 @@ public class EnemySpawnManager : MonoBehaviour
         playerHealth = _player.PlayerHealth;
     }
 
+
+    //public EnemyPool<Projectile> GetPool()
+    //{   
+    //    return _pool;
+    //}
+
     private void Start()
+    {
+        InitEnemyPool();
+
+        //InitProjectilePool();
+
+        StartNextSpawnStep();
+    }
+
+    //private void InitProjectilePool()
+    //{
+    //    GameObject projectileContainer = new("ProjectileContainer");
+    //    _pool = new EnemyPool<Projectile>(_projectilePrefab.GetComponent<Projectile>(), _bulletsPoolSize, projectileContainer.transform);
+    //}
+
+    private void InitEnemyPool()
     {
         enemyPools = new Dictionary<string, EnemyPool<Transform>>();
         for (int i = 0; i < enemyPrefabs.Length; i++)
@@ -40,10 +70,8 @@ public class EnemySpawnManager : MonoBehaviour
                                                                       startPoolSize,
                                                                       enemyContainer.transform));
         }
-
-
-        StartNextSpawnStep();
     }
+
 
     private void StartNextSpawnStep()
     {

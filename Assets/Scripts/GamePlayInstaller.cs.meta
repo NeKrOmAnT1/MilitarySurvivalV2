@@ -3,7 +3,15 @@ guid: 480e77d9be6da1941ac277846a7e665f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _hudPrefab: {instanceID: 0}
+  - _bulletPrefab: {instanceID: 0}
+  - _playerPrefab: {instanceID: 0}
+  - _cameraPrefab: {instanceID: 0}
+  - _enemySpawnPrefab: {instanceID: 0}
+  - _playerSO: {instanceID: 0}
+  - _playerSpawnPoint: {instanceID: 0}
+  - _ammoPool: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

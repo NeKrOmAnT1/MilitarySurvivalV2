@@ -1,5 +1,6 @@
 using UnityEngine;
-using Zenject;
+using UnityEngine.Pool;
+
 
 public class Projectile : MonoBehaviour
 {
@@ -19,9 +20,18 @@ public class Projectile : MonoBehaviour
     private PlayerHealth _playerHealth;
     private float _damage;
     private Vector3 _attackPos;
+    private Vector3 _enemyPos;
+    internal ObjectPool<Projectile> ProjectilePool;
 
-    public void Init(PlayerHealth playerHealth, float damage, Transform target)
+
+    //public void Init(PlayerHealth playerHealth, float damage, Transform target);
+
+    //private ProjectileFactory _factory;
+
+    public void Init(Quaternion rot, PlayerHealth playerHealth, float damage, Transform target, Vector3 enemyPos)//, ProjectileFactory factory)
+
     {
+        _enemyPos = enemyPos;
         _target = target;
         _playerHealth = playerHealth;
         _damage = damage;
@@ -31,6 +41,7 @@ public class Projectile : MonoBehaviour
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
+   
 
     public void Launch()
     {
@@ -55,9 +66,15 @@ public class Projectile : MonoBehaviour
         Damage();
         _exp.DeleteSphere();
         _exp.CreateDamageSphere(_attackPos, _damageArea, _targetDamagePrefab);
+      
+        this.gameObject.SetActive(false);
+        this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
 
         //this.gameObject.SetActive(false);//temporary
         Destroy(this.gameObject);
+
+        //temporary
+        // Destroy(this.gameObject);
         //Invoke("DeleteBullet", _timeToDelete);
     }
 

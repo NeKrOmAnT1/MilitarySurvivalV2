@@ -11,6 +11,10 @@ public class GamePlayInstaller : MonoInstaller
     [SerializeField] private PlayerSO _playerSO;
     [SerializeField] private Transform _playerSpawnPoint;
 
+    [SerializeField] private AmmoPool _ammoPool;
+    //[SerializeField] private Projectile _projectilePrefab;
+
+
 
     private CameraFollow _camera;
 
@@ -26,13 +30,22 @@ public class GamePlayInstaller : MonoInstaller
 
         InstallHud();
 
+        
 
         InstallEnemySpawnManager();
 
         Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+
+        InstallAmmoPool();
+
     }
 
 
+    private void InstallAmmoPool()
+    {
+        var pool = Container.InstantiatePrefabForComponent<AmmoPool>(_ammoPool);
+        Container.Bind<AmmoPool>().FromInstance(pool).AsSingle().NonLazy();
+    }
     private void InstallEnemySpawnManager()
     {
         var spawner = Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);

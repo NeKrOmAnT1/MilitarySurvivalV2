@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6655857326069907471}
   m_Layer: 0
   m_Name: EnemySpawnManager
-  m_TagString: Untagged
+  m_TagString: 1111
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +75,8 @@ MonoBehaviour:
     projectile1EnemyAmount: 6
     spawnTime: 20
   startPoolSize: 10
+  _projectilePrefab: {fileID: 8949988406024596993, guid: b62a243981d4f8345a02f8a743907435, type: 3}
+  _bulletsPoolSize: 20
 --- !u!1 &4062401766149362235
 GameObject:
   m_ObjectHideFlags: 0
