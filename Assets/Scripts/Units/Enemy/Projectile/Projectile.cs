@@ -31,8 +31,7 @@ public class Projectile : MonoBehaviour
     //private ProjectileFactory _factory;
 
     public void Init(Quaternion rot, PlayerHealth playerHealth, float damage, Transform target, Vector3 enemyPos)//, ProjectileFactory factory)
-
-    {
+    {     
         _enemyPos = enemyPos;
         _target = target;
         _playerHealth = playerHealth;
@@ -43,10 +42,15 @@ public class Projectile : MonoBehaviour
         _attackPos = new Vector3(target.position.x, -0.95f, target.position.z);
         _exp.CreateSphere(_attackPos, _damageArea, _targetPrefab);
     }
-   
+
+    private void Start()
+    {
+        //this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
+    }
 
     public void Launch()
     {
+        this.transform.SetPositionAndRotation(_enemyPos, Quaternion.identity);
         Physics.gravity = Vector3.up * _gravity;
         _rigidbody.useGravity = true;
         _rigidbody.velocity = CalculateLaunchData().initialVelocity;

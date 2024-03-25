@@ -44,12 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf48909b9bc1be140b275d588b09ccea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 8949988406024596993, guid: b62a243981d4f8345a02f8a743907435, type: 3}
-  _bulletsPoolSize: 20
-  startPoolSize: 10
   _ownerPoolData:
   - ProjectileOwner: 1
-    Pools:
-    - Prefab: {fileID: 8598036695169180062, guid: b62a243981d4f8345a02f8a743907435, type: 3}
-      PoolCount: 10
-      PoolMaxCount: 20
+    Prefab: {fileID: 8598036695169180062, guid: b62a243981d4f8345a02f8a743907435, type: 3}
+    _startPoolSize: 5

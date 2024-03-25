@@ -31,14 +31,14 @@ public class GamePlayInstaller : MonoInstaller
 
         InstallHud();
 
-        
+        InstallAmmoPool();
 
         //InstallProjectileFactory();
         InstallEnemySpawnManager();
 
         Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
 
-        InstallAmmoPool();
+        
 
     }
 
