@@ -5,12 +5,9 @@ using Zenject;
 
 public class ProjectileEnemy : Enemy, ICanAttack
 {
-    [SerializeField] private Transform _firePoint;
-    [SerializeField] private GameObject _projectilePrefab;
-    [SerializeField] private int _bulletsPoolSize = 20;
-
-
-    [SerializeField] private int _bulletsPoolSize = 20;
+    //[SerializeField] private Transform _firePoint;
+    //[SerializeField] private GameObject _projectilePrefab;
+    //[SerializeField] private int _bulletsPoolSize = 20;
     [SerializeField] private ProjectileOwner _owner => ProjectileOwner.ProjectileEnemy;
 
 
@@ -38,7 +35,7 @@ public class ProjectileEnemy : Enemy, ICanAttack
     {
 
         //_enemyPool = _pool.GetComponent<EnemyPool<Projectile>>();
-        _projectilePool = _pool.GetPool(_owner, _owner);
+        //_projectilePool = _pool.GetPool(_owner, _owner);                             <<<<  пытаюсь получить пулл, но _pool получается null
        Debug.Log(_pool);
     }
 

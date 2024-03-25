@@ -69,16 +69,12 @@ MonoBehaviour:
   - {fileID: 1170783337573605659}
   - {fileID: 1074631044178542146}
   stepSpawnConfigs:
-
   - melee1EnemyAmount: 0
     ram1EnemyAmount: 0
     spit1EnemyAmount: 0
     projectile1EnemyAmount: 1
-
-    spawnTime: 20
+    spawnTime: 0
   startPoolSize: 10
-  _projectilePrefab: {fileID: 8949988406024596993, guid: b62a243981d4f8345a02f8a743907435, type: 3}
-  _bulletsPoolSize: 20
 --- !u!1 &4062401766149362235
 GameObject:
   m_ObjectHideFlags: 0
