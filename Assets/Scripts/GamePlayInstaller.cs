@@ -25,7 +25,8 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         this.gameObject.SetActive(true);
         Container.Bind<ICoroutineRunner>().FromInstance(this);
         
-        InstallFactories();
+        //InstallFactories();
+
         InstallBulletFactory();
 
         InstallPlayerCharacteristics();
@@ -33,13 +34,13 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         InstallCamera();
 
         InstallPlayer();
-
+        InstallAmmoPool();
         InstallEnemySpawnManager();
 
         InstallXpSystem();
         InstallMoneySystem();
         InstallProgressSystem();
-
+        
         InstallHud();
     }
 
@@ -49,20 +50,20 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
     private void InstallProgressSystem() => 
         Container.Bind<ProgressSystem>().FromNew().AsSingle().NonLazy();
 
-    private void InstallXpSystem() => 
+    private void InstallXpSystem() =>
         Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
-        InstallHud();
+    //InstallHud();
 
-        InstallAmmoPool();
+    //InstallAmmoPool();
 
-        //InstallProjectileFactory();
-        InstallEnemySpawnManager();
+    //InstallProjectileFactory();
+    //InstallEnemySpawnManager();
 
-        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+    //Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
 
-        
 
-    }
+
+
 
     //private void InstallProjectileFactory()
     //{
@@ -75,6 +76,7 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         var pool = Container.InstantiatePrefabForComponent<AmmoPool>(_ammoPool);
         Container.Bind<AmmoPool>().FromInstance(pool).AsSingle().NonLazy();
     }
+
     private void InstallEnemySpawnManager()
     {
         var spawner = Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);
@@ -110,4 +112,6 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
 
     private void InstallPlayerCharacteristics() => 
         Container.Bind<PlayerCharacteristics>().FromNew().AsSingle().WithArguments(_playerSO).NonLazy();
+
+
 }
