@@ -5,15 +5,49 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] private ResourceBarUI _hpBarUI;
     [SerializeField] private ResourceBarUI _xpBarUI;
+    [SerializeField] private GameObject _upgradeMenuObj;
+    [SerializeField] private UpgradeMenu _upgradeMenu;
 
-    [Inject] private readonly Player _player;
+    private Player _player;
+    private XpSystem _xpSystem;
 
-    private void Start() =>
+    public ProgressSystem ProgressSystem { get; private set; }
+    public MoneySystem MoneySystem { get; private set; }
+    public ActiveSkillUpCardSO[] ActiveSkillUpCards { get; private set; }
+    public PassiveSkillUpCardSO[] PassiveSkillUpCards { get; private set; }
+
+
+    [Inject]
+    private void Construct(Player player, ProgressSystem progressSystem, XpSystem xpSystem, MoneySystem moneySystem,
+        ActiveSkillUpCardSO[] activeSkillUpCards, PassiveSkillUpCardSO passiveSkillUpCards)
+    {
+        _player = player;
+        ProgressSystem = progressSystem;
+        _xpSystem = xpSystem;
+        MoneySystem = moneySystem;
+
+        _upgradeMenuObj.SetActive(false);
         _player.PlayerHealth.OnHealthChangedE += UpdateHPValue;
+        _xpSystem.ChangeXPE += UpdateXPValue;
+        ProgressSystem.EnableUpgradeMenuE += EnableUpgradeMenu;
+        ProgressSystem.DisableUpgradeMenuE += DisableUpgradeMenu;
+
+        UpdateXPValue();
+    }
+
 
     private void UpdateHPValue(float current, float max) =>
         _hpBarUI.SetBarAmount(current / max);
 
-    public void UpdateXPValue(float current, float max) =>
-        _xpBarUI.SetBarAmount(current / max);
+    public void UpdateXPValue() =>
+        _xpBarUI.SetBarAmount(_xpSystem.CurrentXp / _xpSystem.TargetXp);
+
+    public void EnableUpgradeMenu()
+    {
+        _upgradeMenuObj.SetActive(true);
+        //_upgradeMenu.Enable();
+    }
+
+    private void DisableUpgradeMenu() =>
+        _upgradeMenuObj.SetActive(false);
 }

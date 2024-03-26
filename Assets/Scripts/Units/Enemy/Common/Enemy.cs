@@ -9,10 +9,12 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] protected float _damage = 5;
     [SerializeField] protected float _attackDelay = 5;
     [SerializeField] protected int _xpForKilling = 5;
+    [SerializeField] protected int _moneyForKilling = 20;
 
     public SideType SideType { get; set; }
     public Transform Target { get; protected set; }
     public int XpForKilling { get => _xpForKilling; }
+    public int MoneyForKilling { get => _moneyForKilling; }
 
     protected PlayerHealth _playerHealth;
 

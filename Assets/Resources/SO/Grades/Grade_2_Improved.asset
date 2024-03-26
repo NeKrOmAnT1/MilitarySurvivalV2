@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca80422d661c3a42bb89908f5c3748a, type: 3}
+  m_Name: Grade_2_Improved
+  m_EditorClassIdentifier: 
+  _name: Improved
+  ActiveSkill_1: 11
+  ActiveValue_1: 20
+  ActiveModifier_1: 200
+  ActiveIsTEmporary_1: 0
+  ActiveLifetime_1: 0
+  ActiveSkill_2: 12
+  ActiveValue_2: -10
+  ActiveModifier_2: 200
+  ActiveIsTEmporary_2: 0
+  ActiveLifetime_2: 0
+  PassiveSkill_1: 1
+  PassiveValue_1: 20
+  PassiveModifier_1: 200
+  PassiveIsTEmporary_1: 0
+  PassiveLifetime_1: 0
+  PassiveSkill_2: 3
+  PassiveValue_2: 10
+  PassiveModifier_2: 200
+  PassiveIsTEmporary_2: 0
+  PassiveLifetime_2: 0

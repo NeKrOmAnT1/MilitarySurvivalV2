@@ -1,6 +1,5 @@
 public class WeaponCharacteristics : BaseCharacteristics
 {
-    
     public string Name { get; private set; }
     public WeaponType WeaponType { get; private set; }
 

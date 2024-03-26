@@ -17,6 +17,7 @@ public class WeaponSelectionUI : MonoBehaviour
         foreach (var item in weaponCharacteristics)
         {
             _dropdown.options.Add((new TMP_Dropdown.OptionData() { text = item.Name }));
+            _weaponSelection.AddDic(item.Name, item);
         }
     }
 

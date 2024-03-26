@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using Zenject;
 
-public class GamePlayInstaller : MonoInstaller
+public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
 {
     [SerializeField] private HUD _hudPrefab;
     [SerializeField] private Bullet _bulletPrefab;
@@ -21,26 +22,48 @@ public class GamePlayInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        this.gameObject.SetActive(true);
+        Container.Bind<ICoroutineRunner>().FromInstance(this);
+        
+        //InstallFactories();
+
         InstallBulletFactory();
 
         InstallPlayerCharacteristics();
-        
+
         InstallCamera();
 
         InstallPlayer();
-
-        InstallHud();
-
-        
-
-        //InstallProjectileFactory();
+        InstallAmmoPool();
         InstallEnemySpawnManager();
 
-        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
-
-        InstallAmmoPool();
-
+        InstallXpSystem();
+        InstallMoneySystem();
+        InstallProgressSystem();
+        
+        InstallHud();
     }
+
+    private void InstallMoneySystem() => 
+        Container.Bind<MoneySystem>().FromNew().AsSingle().NonLazy();
+
+    private void InstallProgressSystem() => 
+        Container.Bind<ProgressSystem>().FromNew().AsSingle().NonLazy();
+
+    private void InstallXpSystem() =>
+        Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+    //InstallHud();
+
+    //InstallAmmoPool();
+
+    //InstallProjectileFactory();
+    //InstallEnemySpawnManager();
+
+    //Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
+
+
+
+
 
     //private void InstallProjectileFactory()
     //{
@@ -53,6 +76,7 @@ public class GamePlayInstaller : MonoInstaller
         var pool = Container.InstantiatePrefabForComponent<AmmoPool>(_ammoPool);
         Container.Bind<AmmoPool>().FromInstance(pool).AsSingle().NonLazy();
     }
+
     private void InstallEnemySpawnManager()
     {
         var spawner = Container.InstantiatePrefabForComponent<EnemySpawnManager>(_enemySpawnPrefab);
@@ -88,4 +112,6 @@ public class GamePlayInstaller : MonoInstaller
 
     private void InstallPlayerCharacteristics() => 
         Container.Bind<PlayerCharacteristics>().FromNew().AsSingle().WithArguments(_playerSO).NonLazy();
+
+
 }

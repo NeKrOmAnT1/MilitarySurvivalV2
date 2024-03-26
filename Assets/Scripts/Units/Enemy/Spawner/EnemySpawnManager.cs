@@ -14,54 +14,31 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private StepSpawnConfig[] stepSpawnConfigs;
 
     private Player _player;
-
+    private AmmoPool _ammoPool;
     private Transform target;
     private PlayerHealth playerHealth;
     ///private ProjectileFactory _projectileFactory;
 
     private Dictionary<string, EnemyPool<Transform>> enemyPools;
     private int currentStep = 0;
-    public int startPoolSize = 10;
-
-
-
-    //private EnemyPool<Projectile> _pool;
-    //[SerializeField] private GameObject _projectilePrefab;
-    //[SerializeField] private int _bulletsPoolSize = 20;
-
-
-    
+    public int startPoolSize = 10; 
 
     [Inject]
-    private void Construct(Player player)//, ProjectileFactory projectileFactory)
+    private void Construct(Player player, AmmoPool ammoPool)//, ProjectileFactory projectileFactory)
     {
         _player = player;
         target = _player.transform;
         playerHealth = _player.PlayerHealth;
+        _ammoPool = ammoPool;
+
         //_projectileFactory = projectileFactory;
     }
 
-
-    //public EnemyPool<Projectile> GetPool()
-    //{   
-    //    return _pool;
-    //}
-
     private void Start()
     {
-        InitEnemyPool();
-
-        //InitProjectilePool();
-
+        InitEnemyPool();      
         StartNextSpawnStep();
     }
-
-    //private void InitProjectilePool()
-    //{
-    //    GameObject projectileContainer = new("ProjectileContainer");
-    //    _pool = new EnemyPool<Projectile>(_projectilePrefab.GetComponent<Projectile>(), _bulletsPoolSize, projectileContainer.transform);
-    //}
-
     private void InitEnemyPool()
     {
         enemyPools = new Dictionary<string, EnemyPool<Transform>>();
@@ -131,6 +108,11 @@ public class EnemySpawnManager : MonoBehaviour
         //if (Enemy.TryGetComponent<ProjectileEnemy>(out var projEnemy))
         //    projEnemy.AddFActory(_projectileFactory);
         /////////////////////////////////////////////////////////////
+        ///
+        if(Enemy.TryGetComponent<ProjectileEnemy>(out var projectileEnemy))
+            projectileEnemy.SetAmmoPool(_ammoPool);
+
+
         OnSpawned?.Invoke(Enemy.GetComponent<EnemyDeath>());
     }
     private Transform GetRandomSpawnPoint() =>

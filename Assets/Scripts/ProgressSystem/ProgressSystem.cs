@@ -1,28 +1,49 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ProgressSystem
 {
-    //private readonly XpSystem _xpSystem; //will probably be needed
-    //private readonly MoneySystem _moneySystem;
+    private readonly XpSystem _xpSystem;
+    private readonly MoneySystem _moneySystem;
     private readonly PlayerCharacteristics _playerCharacteristics;
-    private readonly WeaponCharacteristics _weaponCharacteristics;
+    private WeaponCharacteristics _weaponCharacteristics;
     private readonly ICoroutineRunner _coroutine;
+    private readonly WeaponSelection _weaponSelection;
+
+    public event Action EnableUpgradeMenuE;
+    public event Action DisableUpgradeMenuE;
 
     public ProgressSystem(XpSystem xpSystem, MoneySystem moneySystem,
-        PlayerCharacteristics playerCharacteristics, WeaponCharacteristics weaponCharacteristics,
-        ICoroutineRunner coroutine)
+        PlayerCharacteristics playerCharacteristics, ICoroutineRunner coroutine, WeaponSelection weaponSelection)
     {
-        //_xpSystem = xpSystem;
-        //_moneySystem = moneySystem;
+        _xpSystem = xpSystem;
+        _moneySystem = moneySystem;
         _playerCharacteristics = playerCharacteristics;
-        _weaponCharacteristics = weaponCharacteristics;
         _coroutine = coroutine;
+        _weaponSelection = weaponSelection;
+        _weaponCharacteristics = _weaponSelection.CurrentWeaponCharacteristics;
 
-        Debug.Log(xpSystem);
-        Debug.Log(moneySystem);
-        Debug.Log(playerCharacteristics);
-        Debug.Log(weaponCharacteristics);
-        Debug.Log(coroutine);
+        _xpSystem.XpIsFull += EnterUpgradeMenu;
+        weaponSelection.CangeWeapon += ChangeWeapon;
+    }
+
+    private void ChangeWeapon(WeaponCharacteristics weaponCharacteristics) =>
+        _weaponCharacteristics = weaponCharacteristics;
+
+    private void EnterUpgradeMenu()
+    {
+        Time.timeScale = 0;
+        EnableUpgradeMenuE?.Invoke();
+    }
+
+    public void SkillUp(BaseCharacteristics characteristics, bool isTEmporary, Stat skill,
+        float value, TypeModifier modifier, float lifetime, float price)
+    {
+        if (price <= _moneySystem.Money)
+        {
+            AcceptSkill(characteristics, isTEmporary, skill, value, modifier, lifetime);
+            _moneySystem.SpendMoney(price);
+        }
     }
 
     public void AcceptGrade(GradeSO grade)
@@ -44,6 +65,10 @@ public class ProgressSystem
         AcceptSkill(_playerCharacteristics, grade.PassiveIsTEmporary_2,
             DefinePassiveSkill(grade.PassiveSkill_2), grade.PassiveValue_2, grade.PassiveModifier_2,
             grade.PassiveLifetime_2);
+
+        Time.timeScale = 1;
+        DisableUpgradeMenuE?.Invoke();
+        _xpSystem.Reset();
     }
 
     private void AcceptSkill(BaseCharacteristics characteristics, bool isTEmporary, Stat skill,
@@ -61,7 +86,7 @@ public class ProgressSystem
 
         switch (activeSkill)
         {
-            case ActiveSkill.AttackSpeed:
+            case ActiveSkill.BulletSpeed:
                 skill = _weaponCharacteristics.BulletSpeed;
                 break;
             case ActiveSkill.CoolDown:
