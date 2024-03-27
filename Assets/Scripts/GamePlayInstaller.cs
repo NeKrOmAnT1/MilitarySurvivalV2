@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -11,10 +10,7 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
     [SerializeField] private EnemySpawnManager _enemySpawnPrefab;
     [SerializeField] private PlayerSO _playerSO;
     [SerializeField] private Transform _playerSpawnPoint;
-    //[SerializeField] private Projectile _projectilePrefab;
-
     [SerializeField] private AmmoPool _ammoPool;
-    //[SerializeField] private Projectile _projectilePrefab;
 
 
 
@@ -24,8 +20,6 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
     {
         this.gameObject.SetActive(true);
         Container.Bind<ICoroutineRunner>().FromInstance(this);
-        
-        //InstallFactories();
 
         InstallBulletFactory();
 
@@ -52,24 +46,6 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
 
     private void InstallXpSystem() =>
         Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
-    //InstallHud();
-
-    //InstallAmmoPool();
-
-    //InstallProjectileFactory();
-    //InstallEnemySpawnManager();
-
-    //Container.Bind<XpSystem>().FromNew().AsSingle().NonLazy();
-
-
-
-
-
-    //private void InstallProjectileFactory()
-    //{
-    //    Container.Bind<ProjectileFactory>().AsSingle();
-    //    Container.BindMemoryPool<Projectile, Projectile.Pool>().FromComponentInNewPrefab(_projectilePrefab);
-    //}
 
     private void InstallAmmoPool()
     {
