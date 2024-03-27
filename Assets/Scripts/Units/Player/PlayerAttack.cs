@@ -5,9 +5,8 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Transform _bulletspawnPoint;
+    [SerializeField] private Transform _meleeAttackPoint;
     [SerializeField] private LayerMask _enemyMask;
-    [Space]
-    [SerializeField] private GameObject _testObject;
 
     private float _nextFire = 0.0f;
     private SideType _side;
@@ -61,14 +60,8 @@ public class PlayerAttack : MonoBehaviour
                 break;
             case WeaponType.Melee:
 
-                Collider[] hitEnemies = Physics.OverlapSphere(transform.forward * _player.WeaponCharacteristics.Distance.Value, 
+                Collider[] hitEnemies = Physics.OverlapSphere(_meleeAttackPoint.position, 
                     _player.WeaponCharacteristics.DamageArea.Value, _enemyMask);
-
-                // for test
-                var r = _player.WeaponCharacteristics.DamageArea.Value;
-                _testObject.transform.localScale = new Vector3(r,r,r);
-                _testObject.transform.position = transform.forward * _player.WeaponCharacteristics.Distance.Value;
-                //for test end
 
                 foreach (Collider collider in hitEnemies)
                 {

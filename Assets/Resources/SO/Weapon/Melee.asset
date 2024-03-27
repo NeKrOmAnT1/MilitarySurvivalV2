@@ -20,4 +20,4 @@ MonoBehaviour:
   <Distance>k__BackingField: 1.5
   <SpreadAngle>k__BackingField: 0
   <BulletsNumber>k__BackingField: 1
-  <DamageArea>k__BackingField: 8
+  <DamageArea>k__BackingField: 6
