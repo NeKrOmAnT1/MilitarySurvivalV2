@@ -2,6 +2,7 @@
 
 public class PlayerCharacteristics : BaseCharacteristics
 {
+    public Stat Regen { get; private set; }
     public Stat Hp { get; private set; }
     public Stat Armour { get; private set; }
     public Stat MoveSpeed { get; private set; }
@@ -11,6 +12,7 @@ public class PlayerCharacteristics : BaseCharacteristics
 
     public PlayerCharacteristics(PlayerSO playerStats)
     {
+        Regen = new(playerStats.Regen);
         Hp = new(playerStats.Hp);
         Armour = new(playerStats.Armour);
         MoveSpeed = new(playerStats.MoveSpeed);
