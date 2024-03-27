@@ -35,7 +35,7 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         InstallMoneySystem();
         InstallProgressSystem();
         
-        InstallHud();
+        InstallHudAndUpgradeMenu();
     }
 
     private void InstallMoneySystem() => 
@@ -66,10 +66,12 @@ public class GamePlayInstaller : MonoInstaller, ICoroutineRunner
         
     }
 
-    private void InstallHud()
+    private void InstallHudAndUpgradeMenu()
     {
         var hud = Container.InstantiatePrefabForComponent<HUD>(_hudPrefab);
         Container.Bind<HUD>().FromInstance(hud).AsSingle();
+
+        Container.Bind<UpgradeMenu>().FromInstance(hud.GetComponent<UpgradeMenu>()).AsSingle();
     }
 
     private void InstallPlayer()

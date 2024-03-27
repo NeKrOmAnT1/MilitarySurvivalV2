@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(UpgradeMenu))]
 public class HUD : MonoBehaviour
 {
     [SerializeField] private ResourceBarUI _hpBarUI;
@@ -44,7 +45,7 @@ public class HUD : MonoBehaviour
     public void EnableUpgradeMenu()
     {
         _upgradeMenuObj.SetActive(true);
-        //_upgradeMenu.Enable();
+        _upgradeMenu.InitRandomCards();
     }
 
     private void DisableUpgradeMenu() =>

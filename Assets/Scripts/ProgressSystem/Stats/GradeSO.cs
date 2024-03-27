@@ -34,23 +34,3 @@ public class GradeSO : ScriptableObject
     public float PassiveLifetime_2;
 
 }
-
-public enum PassiveSkill
-{
-    Hp = 1,
-    Armour = 2, 
-    MoveSpeed = 3,
-    Luck = 4,
-
-}
-
-public enum ActiveSkill
-{
-    BulletSpeed = 11,
-    CoolDown = 12,
-    DamageDealt = 13,
-    Distance = 14,
-    SpreadAngle = 15,
-    BulletsNumber = 16,
-    DamageArea = 17,
-}

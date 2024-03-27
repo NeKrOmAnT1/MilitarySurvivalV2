@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 public class UpgradeMenu : MonoBehaviour
 {
@@ -9,17 +9,38 @@ public class UpgradeMenu : MonoBehaviour
     [SerializeField] private HUD _hud;
     [SerializeField] private TMP_Text _moneyText;
     [SerializeField] private GameObject _UpgradeMenuObj;
-    //[Space]
-    //[SerializeField] private Image _card1Image;
-    //[SerializeField] private Image _card2Image; 
-    //[SerializeField] private Image _card3Image;
-    //[Space]
-    //[SerializeField] private TMP_Text _card1Text;
-    //[SerializeField] private TMP_Text _card2Text;
-    //[SerializeField] private TMP_Text _card3Text;
+    [Space]
+    [SerializeField] private Card[] _cardButtons;
 
-    private void Start() => 
+
+    private BaseSkillUpCardSO[] _skillUpCards;
+    //todo other cards
+
+    [Inject]
+    private void Construct(BaseSkillUpCardSO[] activeSkillUpCards)
+    {
+        _skillUpCards = activeSkillUpCards;
+
         _hud.MoneySystem.MoneyChange += MoneyChange;
+    }
+
+    public void InitRandomCards()
+    {
+        foreach (var cardButton in _cardButtons)
+        {
+            BaseSkillUpCardSO card = RandomCard();
+            cardButton.FillCard(card);
+        }
+
+        _card1 = RandomCard();
+        _card2 = RandomCard();
+        _card3 = RandomCard();
+
+        //toso fill cards buttone
+    }
+
+    private BaseSkillUpCardSO RandomCard() =>
+        _skillUpCards[Random.Range(0, _skillUpCards.Length)];
 
     public void Exit()
     {
@@ -27,6 +48,6 @@ public class UpgradeMenu : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void MoneyChange(float value) => 
+    private void MoneyChange(float value) =>
         _moneyText.text = value.ToString();
 }

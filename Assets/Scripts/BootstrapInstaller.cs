@@ -5,31 +5,25 @@ using Zenject;
 public class BootstrapInstaller : MonoInstaller
 {
     [SerializeField] private WeaponSO[] _weaponSO;
-    [SerializeField] private ActiveSkillUpCardSO[] _activeSkillUpCardSO;
-    [SerializeField] private PassiveSkillUpCardSO[] _passiveSkillUpCardSO;
+    [SerializeField] private BaseSkillUpCardSO[] _badeSkillUpCardSO;
 
     public override void InstallBindings()
     {
         InstallWeaponSelection();
         InstallWeapon();
-        InstallActiveCards();
-        InstallPassiveCards();
-    }
 
-    private void InstallPassiveCards()
-    {
-        foreach (var skill in _passiveSkillUpCardSO)
-        {
-            Container.Bind<PassiveSkillUpCardSO>().FromInstance(skill).AsCached();
-        }
+        InstallCards();
     }
+       
 
-    private void InstallActiveCards()
+    private void InstallCards()
     {
-        foreach (var skill in _activeSkillUpCardSO)
+        foreach (var skill in _badeSkillUpCardSO)
         {
-            Container.Bind<ActiveSkillUpCardSO>().FromInstance(skill).AsCached();
+            Container.Bind<BaseSkillUpCardSO>().FromInstance(skill).AsCached();
         }
+
+        //todo InstallOtherCards
     }
 
     private void InstallWeaponSelection() =>
