@@ -1,10 +1,11 @@
 ﻿public enum ActiveSkill
 {
-    BulletSpeed = 11,
-    CoolDown = 12,
-    DamageDealt = 13,
-    Distance = 14,
-    SpreadAngle = 15,
-    BulletsNumber = 16,
-    DamageArea = 17,
+    No = 11,
+    BulletSpeed = 12,
+    CoolDown = 13,
+    DamageDealt = 14,
+    Distance = 15,
+    SpreadAngle = 16,
+    BulletsNumber = 17,
+    DamageArea = 18,
 }

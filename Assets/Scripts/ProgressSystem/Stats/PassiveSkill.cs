@@ -1,10 +1,10 @@
 ﻿public enum PassiveSkill
 {
-    Regen = 0,
-    Hp = 1,
-    Armour = 2, 
-    MoveSpeed = 3,
-    Luck = 4,
-
+    No = 0,
+    Regen = 1,
+    Hp = 2,
+    Armour = 3, 
+    MoveSpeed = 4,
+    Luck = 5,
 }
 

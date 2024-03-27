@@ -4,10 +4,10 @@
 [CreateAssetMenu(fileName = "New PassiveSkill UpCardSO", menuName = "PassiveSkill UpCardSO")]
 public class PassiveSkillUpCardSO : BaseSkillUpCardSO
 {
-    [Space]
-    [Header("Passive Skill")]
+    //[Space]
+    //[Header("Passive Skill")]
     //public string Name;
-    public PassiveSkill PassiveSkill;
+    //public PassiveSkill PassiveSkill;
     //public float Value;
     //public TypeModifier PassiveModifier;
     //public bool IsTEmporary;
