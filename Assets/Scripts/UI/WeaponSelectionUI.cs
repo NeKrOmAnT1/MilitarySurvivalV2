@@ -21,9 +21,10 @@ public class WeaponSelectionUI : MonoBehaviour
         }
     }
 
-    private void Start() => 
+
+    private void Start() =>
         OnChoice();
 
-    public void OnChoice() => 
+    public void OnChoice() =>
         _weaponSelection.AddCurrentWeaponName(_dropdown.options[_dropdown.value].text);
 }

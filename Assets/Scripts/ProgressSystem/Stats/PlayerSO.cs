@@ -4,6 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DefaultPlayerSO", menuName = "PlayerSO")]
 public class PlayerSO : ScriptableObject
 {
+    [field: SerializeField, Tooltip("Health recovery in units per second")]
+    public float Regen { get; private set; }
+
     [field: SerializeField, Tooltip("Maximum Health Value")]
     public float Hp { get; private set; }
 

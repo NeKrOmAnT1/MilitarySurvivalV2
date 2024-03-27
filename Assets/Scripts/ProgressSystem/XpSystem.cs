@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class XpSystem 
+public class XpSystem
 {
     private float _targetXp = 100; //where to get it from?
 
@@ -15,7 +15,7 @@ public class XpSystem
     public XpSystem(EnemySpawnManager enemySpawnManager)
     {
         enemySpawnManager.OnSpawned += AddEnemy;
-        
+
         ChangeXPE?.Invoke();
     }
 
@@ -30,14 +30,16 @@ public class XpSystem
         {
             CurrentXp = _targetXp;
             XpIsFull?.Invoke();
+
+            Reset();
         }
         ChangeXPE?.Invoke();
     }
 
-    public void Reset()
+    private void Reset()
     {
         CurrentXp = 0;
-        ChangeXPE?.Invoke();
         _targetXp += 10; //trmoirary
+        ChangeXPE?.Invoke();
     }
 }

@@ -18,8 +18,7 @@ public class HUD : MonoBehaviour
 
 
     [Inject]
-    private void Construct(Player player, ProgressSystem progressSystem, XpSystem xpSystem, MoneySystem moneySystem,
-        ActiveSkillUpCardSO[] activeSkillUpCards, PassiveSkillUpCardSO passiveSkillUpCards)
+    private void Construct(Player player, ProgressSystem progressSystem, XpSystem xpSystem, MoneySystem moneySystem)
     {
         _player = player;
         ProgressSystem = progressSystem;
