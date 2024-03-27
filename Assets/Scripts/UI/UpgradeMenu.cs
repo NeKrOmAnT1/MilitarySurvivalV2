@@ -15,12 +15,13 @@ public class UpgradeMenu : MonoBehaviour
 
     private BaseSkillUpCardSO[] _skillUpCards;
     //todo other cards
+    private ProgressSystem _progressSystem;
 
     [Inject]
-    private void Construct(BaseSkillUpCardSO[] activeSkillUpCards)
+    private void Construct(BaseSkillUpCardSO[] activeSkillUpCards, ProgressSystem progressSystem)
     {
         _skillUpCards = activeSkillUpCards;
-
+        _progressSystem = progressSystem;
         _hud.MoneySystem.MoneyChange += MoneyChange;
     }
 
@@ -29,12 +30,8 @@ public class UpgradeMenu : MonoBehaviour
         foreach (var cardButton in _cardButtons)
         {
             BaseSkillUpCardSO card = RandomCard();
-            cardButton.FillCard(card);
+            cardButton.FillCard(card, _progressSystem);
         }
-
-        _card1 = RandomCard();
-        _card2 = RandomCard();
-        _card3 = RandomCard();
 
         //toso fill cards buttone
     }
