@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class SquadScript : MonoBehaviour
 {
@@ -21,10 +22,19 @@ public class SquadScript : MonoBehaviour
     public GameObject AllyPrefab;
     public float _moveSpeed;
 
+    private DiContainer _diContainer;
     public Transform PlayerTransform { get => _playerTransform;}
 
     public void Initialization(Transform playerTransform) => 
         _playerTransform = playerTransform;
+
+
+    [Inject]
+    private void Construct(DiContainer diContainer)
+    {
+        _diContainer = diContainer;
+        _diContainer.Bind<SquadScript>().FromInstance(this).AsSingle();
+    }
 
     private void Start()
     {
@@ -105,7 +115,14 @@ public class SquadScript : MonoBehaviour
     private void SpawnAllyPrefab(Transform point)
     {
         int count = 1;
-        var ally = Instantiate(AllyPrefab, point.position, Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++), 0) );        
-        ally.AddComponent<Allys>();
+        //var ally = Instantiate(AllyPrefab, point.position, Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++), 0) );        
+        //ally.AddComponent<Allys>();
+
+        var rot = Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++) , 0 );
+
+        Allys ally =
+               _diContainer.InstantiatePrefabForComponent<Allys>(AllyPrefab, point.position , rot , null);
+
+        //ally.AddComponent<Allys>();
     }
 }

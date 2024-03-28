@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7062203313320004316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1043262236220693343}
+  m_Layer: 3
+  m_Name: MeleeAttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1043262236220693343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062203313320004316}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 224801724640592921}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7871045659251773092
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +244,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0def0db0e4665e14e87c6263274fa0da, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9201867210635915439}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0def0db0e4665e14e87c6263274fa0da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1043262236220693343}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0def0db0e4665e14e87c6263274fa0da, type: 3}
       insertIndex: -1
@@ -220,6 +254,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0def0db0e4665e14e87c6263274fa0da, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1125870194378544688}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0def0db0e4665e14e87c6263274fa0da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 372402415252673357}
   m_SourcePrefab: {fileID: 100100000, guid: 0def0db0e4665e14e87c6263274fa0da, type: 3}
 --- !u!4 &224801724640592921 stripped
 Transform:
@@ -278,3 +315,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &372402415252673357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600517339337285283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee70308dcf7c7b24cbf42c736b01f0a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meleeAttackPoint: {fileID: 1043262236220693343}
+  _bulletspawnPoint: {fileID: 9201867210635915439}
+  _sideType: 1
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 8
