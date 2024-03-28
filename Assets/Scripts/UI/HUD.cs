@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using Zenject;
 
 public class HUD : MonoBehaviour
@@ -7,6 +8,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private ResourceBarUI _xpBarUI;
     [SerializeField] private GameObject _upgradeMenuObj;
     [SerializeField] private UpgradeMenu _upgradeMenu;
+    [SerializeField] private TMP_Text _xpLevelText;
 
     private Player _player;
     private XpSystem _xpSystem;
@@ -38,8 +40,11 @@ public class HUD : MonoBehaviour
     private void UpdateHPValue(float current, float max) =>
         _hpBarUI.SetBarAmount(current / max);
 
-    public void UpdateXPValue() =>
+    public void UpdateXPValue()
+    {
         _xpBarUI.SetBarAmount(_xpSystem.CurrentXp / _xpSystem.TargetXp);
+        _xpLevelText.text = _xpSystem.XpLevel.ToString();
+    }
 
     public void EnableUpgradeMenu()
     {

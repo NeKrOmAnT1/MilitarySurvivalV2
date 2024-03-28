@@ -1,17 +1,14 @@
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 public class WeaponSelectionUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown _dropdown;
-    
-    private WeaponSelection _weaponSelection;
+    [SerializeField] protected TMP_Dropdown _dropdown;
 
-    [Inject]
-    private void Construct(WeaponCharacteristics[] weaponCharacteristics, WeaponSelection weaponSelection)
+    protected WeaponSelection _weaponSelection;
+
+    protected void FillDropDown(WeaponCharacteristics[] weaponCharacteristics)
     {
-        _weaponSelection = weaponSelection;
         _dropdown.ClearOptions();
 
         foreach (var item in weaponCharacteristics)
@@ -21,10 +18,9 @@ public class WeaponSelectionUI : MonoBehaviour
         }
     }
 
-
-    private void Start() =>
+    protected void Start() =>
         OnChoice();
 
-    public void OnChoice() =>
+    public void OnChoice() => 
         _weaponSelection.AddCurrentWeaponName(_dropdown.options[_dropdown.value].text);
 }

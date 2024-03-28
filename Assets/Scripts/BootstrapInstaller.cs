@@ -32,8 +32,11 @@ public class BootstrapInstaller : MonoInstaller
         }
     }
 
-    private void InstallWeaponSelection() =>
-        Container.Bind<WeaponSelection>().FromNew().AsSingle().NonLazy();
+    private void InstallWeaponSelection()
+    {
+        Container.Bind<PlayersWeaponSelection>().FromNew().AsSingle().NonLazy();
+        Container.Bind<AllysWeaponSelection>().FromNew().AsSingle().NonLazy();
+    }
 
     private void InstallWeapon()
     {

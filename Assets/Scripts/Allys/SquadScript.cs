@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,18 +22,21 @@ public class SquadScript : MonoBehaviour
     public GameObject AllyPoint;
     public GameObject AllyPrefab;
     public float _moveSpeed;
+    private bool _canSpawn;
+    //private XpSystem _xpSystem;
 
     private DiContainer _diContainer;
-    public Transform PlayerTransform { get => _playerTransform;}
+    public Transform PlayerTransform { get => _playerTransform; }
 
-    public void Initialization(Transform playerTransform) => 
+    public void Initialization(Transform playerTransform) =>
         _playerTransform = playerTransform;
 
 
     [Inject]
-    private void Construct(DiContainer diContainer)
+    private void Construct(DiContainer diContainer)//, XpSystem xpSystem)
     {
         _diContainer = diContainer;
+        //_xpSystem = xpSystem;
         _diContainer.Bind<SquadScript>().FromInstance(this).AsSingle();
     }
 
@@ -40,20 +44,22 @@ public class SquadScript : MonoBehaviour
     {
         offset = _playerTransform.TransformDirection(Vector3.back) * -_distanceBehindPlayer;
 
-        _pointsGameObjects = new List<GameObject>();               
+        _pointsGameObjects = new List<GameObject>();
     }
 
     private void Update()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame && Time.timeScale != 0)
+        if (Mouse.current.leftButton.wasPressedThisFrame && Time.timeScale != 0 && _canSpawn)
         {
             AddAlly();
-        }       
+            _canSpawn = false;
+        }
+
     }
 
     public void AddAlly()
-    {     
-        if(_countPoints <= _maxPoints)
+    {
+        if (_countPoints <= _maxPoints)
         {
             _countPoints++;
             SpawnAlly(1);
@@ -62,22 +68,25 @@ public class SquadScript : MonoBehaviour
             Debug.Log("MaxAlly");
     }
 
-   /* public void RemoveAlly()
-    {    
-        if (_pointsGameObjects.Count > 0)
-        {
-            _pointsGameObjects[_pointsGameObjects.Count - 1].SetActive(false);
-                         
-            _pointsGameObjects.RemoveAt(_pointsGameObjects.Count - 1);
+    public void CanSpawn() => 
+        _canSpawn = true;
 
-            
-            _currentAlly--;
-        }
-        else
-        {
-            Debug.Log("Отряд пуст. Нечего удалять.");
-        }
-    }*/                                                                 // после прописки смерти союзника дописать
+    /* public void RemoveAlly()
+     {    
+         if (_pointsGameObjects.Count > 0)
+         {
+             _pointsGameObjects[_pointsGameObjects.Count - 1].SetActive(false);
+
+             _pointsGameObjects.RemoveAt(_pointsGameObjects.Count - 1);
+
+
+             _currentAlly--;
+         }
+         else
+         {
+             Debug.Log("Отряд пуст. Нечего удалять.");
+         }
+     }*/                                                                 // после прописки смерти союзника дописать
 
 
     private void SpawnAlly(int currentAlly)
@@ -105,9 +114,9 @@ public class SquadScript : MonoBehaviour
         {
             point.transform.position = SquadTransform.position;
             point.transform.rotation = SquadTransform.rotation;
-            point.transform.rotation = Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++), 0);          
-            point.transform.position = point.transform.position + point.transform.forward * _distanceBehindPlayer;          
-        }     
+            point.transform.rotation = Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++), 0);
+            point.transform.position = point.transform.position + point.transform.forward * _distanceBehindPlayer;
+        }
     }
     private float GetAngle() =>
         360f / (1 + _countPoints);
@@ -118,10 +127,10 @@ public class SquadScript : MonoBehaviour
         //var ally = Instantiate(AllyPrefab, point.position, Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++), 0) );        
         //ally.AddComponent<Allys>();
 
-        var rot = Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++) , 0 );
+        var rot = Quaternion.Euler(0, point.transform.rotation.y + (GetAngle() * count++), 0);
 
         Allys ally =
-               _diContainer.InstantiatePrefabForComponent<Allys>(AllyPrefab, point.position , rot , null);
+               _diContainer.InstantiatePrefabForComponent<Allys>(AllyPrefab, point.position, rot, null);
 
         //ally.AddComponent<Allys>();
     }

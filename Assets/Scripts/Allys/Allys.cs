@@ -19,7 +19,7 @@ public class Allys : MonoBehaviour
     private int _numberAlly;
 
     [Inject]
-    private void Construct(WeaponCharacteristics[] weaponCharacteristics, WeaponSelection weaponSelection, BulletFactory bulletFactory)
+    private void Construct(WeaponCharacteristics[] weaponCharacteristics, AllysWeaponSelection weaponSelection, BulletFactory bulletFactory)
     {
         _bulletFactory = bulletFactory;
         foreach (var weapon in weaponCharacteristics)

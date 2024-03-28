@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
 
     [Inject]
     private void Construct(PlayerCharacteristics playerCharacteristics, WeaponCharacteristics[] weaponCharacteristics, 
-        WeaponSelection weaponSelection, DiContainer diContainer)
+        PlayersWeaponSelection weaponSelection, DiContainer diContainer)
     {
         _diContainer = diContainer;
 

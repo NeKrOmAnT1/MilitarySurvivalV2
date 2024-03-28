@@ -8,23 +8,23 @@ public class ProgressSystem
     private readonly PlayerCharacteristics _playerCharacteristics;
     private WeaponCharacteristics _weaponCharacteristics;
     private readonly ICoroutineRunner _coroutine;
-    private readonly WeaponSelection _weaponSelection;
+    private readonly WeaponSelection _playersWeaponSelection;
 
     public event Action EnableUpgradeMenuE;
     public event Action DisableUpgradeMenuE;
 
     public ProgressSystem(XpSystem xpSystem, MoneySystem moneySystem,
-        PlayerCharacteristics playerCharacteristics, ICoroutineRunner coroutine, WeaponSelection weaponSelection)
+        PlayerCharacteristics playerCharacteristics, ICoroutineRunner coroutine, PlayersWeaponSelection playersWeaponSelection)
     {
         _xpSystem = xpSystem;
         _moneySystem = moneySystem;
         _playerCharacteristics = playerCharacteristics;
         _coroutine = coroutine;
-        _weaponSelection = weaponSelection;
-        _weaponCharacteristics = _weaponSelection.CurrentWeaponCharacteristics;
+        _playersWeaponSelection = playersWeaponSelection;
+        _weaponCharacteristics = _playersWeaponSelection.CurrentWeaponCharacteristics;
 
         _xpSystem.XpIsFull += EnterUpgradeMenu;
-        weaponSelection.CangeWeapon += ChangeWeapon;
+        playersWeaponSelection.CangeWeapon += ChangeWeapon;
     }
 
     private void ChangeWeapon(WeaponCharacteristics weaponCharacteristics) =>

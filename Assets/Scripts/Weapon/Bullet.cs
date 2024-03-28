@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] private float _destroyDelay = 5f;
 
-    private SideType _side;
+    [SerializeField]private SideType _side;
     private Vector3 _direction; // Направление движения пули
     private BulletFactory _factory;
 

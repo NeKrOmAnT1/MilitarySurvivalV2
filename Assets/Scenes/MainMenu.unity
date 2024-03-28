@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -681,7 +681,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1008089182}
+      - m_Target: {fileID: 1008089183}
         m_TargetAssemblyTypeName: WeaponSelectionUI, Assembly-CSharp
         m_MethodName: OnChoice
         m_Mode: 1
@@ -947,7 +947,7 @@ GameObject:
   - component: {fileID: 1008089176}
   - component: {fileID: 1008089181}
   - component: {fileID: 1008089180}
-  - component: {fileID: 1008089182}
+  - component: {fileID: 1008089183}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1078,7 +1078,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008089175}
   m_CullTransparentMesh: 1
---- !u!114 &1008089182
+--- !u!114 &1008089183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1008089175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de7b13a4463fe74493daee051798676, type: 3}
+  m_Script: {fileID: 11500000, guid: f42d27e11045c6e458bb09f8f7e2f6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _dropdown: {fileID: 889551481}
