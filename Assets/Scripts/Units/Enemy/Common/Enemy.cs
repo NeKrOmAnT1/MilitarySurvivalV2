@@ -22,5 +22,6 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         _playerHealth = playerHealth;
         Target = target;
+        _enemyDeath.Restart();
     }
 }

@@ -21,4 +21,7 @@ public class EnemyDeath : MonoBehaviour
         Instantiate(_deathFXPrefab, transform.position, Quaternion.identity);
         this.gameObject.SetActive(false);
     }
+
+    public void Restart() => 
+        IsDead = false;
 }
