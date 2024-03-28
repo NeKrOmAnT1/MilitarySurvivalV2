@@ -17,10 +17,14 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
 
     private readonly Dictionary<string, WeaponCharacteristics> _weapons = new();
 
+    private DiContainer _diContainer;
+
     [Inject]
     private void Construct(PlayerCharacteristics playerCharacteristics, WeaponCharacteristics[] weaponCharacteristics, 
-        WeaponSelection weaponSelection)
+        WeaponSelection weaponSelection, DiContainer diContainer)
     {
+        _diContainer = diContainer;
+
         PlayerCharacteristics = playerCharacteristics;
 
         foreach (var weapon in weaponCharacteristics)
@@ -38,7 +42,10 @@ public class Player : MonoBehaviour, IDamagable //Leadership class. Creates and 
 
         PlayerHealth = new(this);
 
-        Instantiate(squadPrefab).GetComponent<SquadScript>()
-        .Initialization(transform);
+
+        SquadScript squadScript =
+              _diContainer.InstantiatePrefabForComponent<SquadScript>
+              (squadPrefab, transform.position, Quaternion.identity, null);
+        squadScript.Initialization(transform);        
     }
 }
